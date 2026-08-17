@@ -1,0 +1,35 @@
+[트롤리 LiDAR 코드 생성 버전]
+
+수정 목적
+- GUI에서 LiDAR를 생성/복제하지 않음.
+- Standalone 실행 시 /World/CooperativeWarehouseCart 아래에 trolley_lidar를 Python 코드로 자동 생성.
+- 기존 AMR Nav2가 사용하던 것과 동일한 PhysX RangeSensorCreateLidar 방식을 사용.
+- 현재 단계는 센서 Prim 생성까지. /trolley/scan ROS 발행은 다음 단계에서 연결.
+
+수정 파일
+1) scripts/cooperative_warehouse_cart.py
+   - _create_trolley_lidar() 추가
+   - _build_cart() 실행 중 카트 생성 직후 trolley_lidar 자동 생성
+   - 생성 경로: /World/CooperativeWarehouseCart/trolley_lidar
+
+2) config/isaac_config.json
+   - cooperative_warehouse_cart.trolley_lidar 설정 추가
+   - 기본 위치(local): [0.0, 0.0, 1.0]
+   - 360도, 0.15~12.0m, 0.5도 수평 해상도
+
+3) scripts/isaac_amr_ros.py
+   - Nav2가 꺼져 있더라도 trolley_lidar가 enabled이면 isaacsim.sensors.physx 확장을 자동 활성화
+
+첫 실행 확인
+./03_run_isaac.sh
+
+터미널에 아래 로그 확인:
+[CARGO CART LIDAR] created /World/CooperativeWarehouseCart/trolley_lidar ...
+
+Stage에서 확인:
+/World/CooperativeWarehouseCart/trolley_lidar
+
+위치 조정:
+config/isaac_config.json 의
+cooperative_warehouse_cart -> trolley_lidar -> translation
+값만 수정.

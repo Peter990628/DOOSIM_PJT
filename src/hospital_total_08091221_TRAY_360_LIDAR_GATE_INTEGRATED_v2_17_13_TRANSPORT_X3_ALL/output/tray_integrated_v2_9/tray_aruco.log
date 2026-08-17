@@ -1,0 +1,26 @@
+[INFO] [launch]: All log files can be found below /home/peter-msi/.ros/log/2026-08-11-18-31-21-667558-peter-msi-339857
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [tray_aruco_pair_node-1]: process started with pid [339858]
+[INFO] [tray_aruco_pair_node-2]: process started with pid [339860]
+[tray_aruco_pair_node-1] [INFO] [1786440682.072352568] [amr1_tray_aruco_gate]: [amr1] tray 3-post ArUco gate ready: outer=[40, 41] center=44 outer_side=left RGB=/amr1/camera/front/color/image_raw
+[tray_aruco_pair_node-2] [INFO] [1786440682.085653024] [amr2_tray_aruco_gate]: [amr2] tray 3-post ArUco gate ready: outer=[42, 43] center=44 outer_side=right RGB=/amr2/camera/front/color/image_raw
+[tray_aruco_pair_node-1] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-1] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-1] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-1] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-1] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-1] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-1] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-1] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-1] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-1] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-2] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-2] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-2] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-2] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-2] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-2] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-2] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-2] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[tray_aruco_pair_node-2] QFontDatabase: Cannot find font directory /home/peter-msi/.local/lib/python3.10/site-packages/cv2/qt/fonts.
+[tray_aruco_pair_node-2] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.

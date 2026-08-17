@@ -1,0 +1,2 @@
+Flask>=3.0,<4.0
+# ROS 2 모드의 rclpy/std_msgs는 pip가 아니라 ROS 2 Humble 환경에서 제공합니다.

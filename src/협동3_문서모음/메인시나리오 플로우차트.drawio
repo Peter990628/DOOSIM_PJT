@@ -1,0 +1,277 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="hospital-amr-flow" name="전체 시나리오 Flowchart">
+    <mxGraphModel dx="2334" dy="1551" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2480" pageHeight="1754" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=34;fontStyle=1;fontColor=#111827;" value="병원 AMR 최종 시나리오 Flowchart" vertex="1">
+          <mxGeometry height="55" width="1780" x="350" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=17;fontColor=#4B5563;" value="Patient Transport Manager 기준 · AMR1/AMR2 공통 · ROS_DOMAIN_ID = 115" vertex="1">
+          <mxGeometry height="35" width="1520" x="480" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="sec1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=2;fontSize=18;fontStyle=1;fontColor=#334155;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;" value="① 시작 / 환자 선택 / 시스템 준비" vertex="1">
+          <mxGeometry height="510" width="550" x="40" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="sec2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=2;fontSize=18;fontStyle=1;fontColor=#334155;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;" value="② 환자 병실 접근 / OCR / 침대 결합" vertex="1">
+          <mxGeometry height="955" width="580" x="620" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="sec3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=2;fontSize=18;fontStyle=1;fontColor=#334155;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;" value="③ 1F → 2F 엘리베이터 / MRI 검사" vertex="1">
+          <mxGeometry height="1000" width="570" x="1230" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="sec4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=2;fontSize=18;fontStyle=1;fontColor=#334155;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;" value="④ 2F → 1F 복귀 / 병실 원위치 / 도킹" vertex="1">
+          <mxGeometry height="1450" width="600" x="1830" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="start" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#111827;strokeColor=#111827;fontColor=#FFFFFF;fontSize=19;fontStyle=1;strokeWidth=2;" value="START" vertex="1">
+          <mxGeometry height="85" width="85" x="85" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="patient" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E22CE;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#581C87;spacing=8;" value="&lt;b&gt;환자 선택&lt;/b&gt;&lt;br&gt;1 김서울 / 2 박인천 / 3 서수원" vertex="1">
+          <mxGeometry height="95" width="310" x="215" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="ready" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E22CE;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#581C87;spacing=8;" value="&lt;b&gt;시스템 연결 확인&lt;/b&gt;&lt;br&gt;자동 Initial Pose Lock&lt;br&gt;Isaac Sim + Nav2 + OCR Ready" vertex="1">
+          <mxGeometry height="115" width="350" x="130" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="ready_dec" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#C2410C;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#7C2D12;" value="준비&lt;br&gt;완료?" vertex="1">
+          <mxGeometry height="100" width="120" x="245" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="ready_fail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#BE123C;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#881337;" value="실행 중단&lt;br&gt;연결 상태 확인" vertex="1">
+          <mxGeometry height="90" width="145" x="410" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="ocr_nav" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#1E3A8A;spacing=8;" value="&lt;b&gt;Nav2&lt;/b&gt;&lt;br&gt;선택 환자의 OCR Pose로 이동" vertex="1">
+          <mxGeometry height="100" width="380" x="720" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="ocr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#14532D;spacing=8;" value="&lt;b&gt;OCR + Auto-Approach&lt;/b&gt;&lt;br&gt;이름 + 생년월일 검증&lt;br&gt;bbox X 중심 정렬&lt;br&gt;환자별 거리만큼 전진" vertex="1">
+          <mxGeometry height="150" width="440" x="690" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="ocr_dec" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#C2410C;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#7C2D12;" value="OCR&lt;br&gt;성공?" vertex="1">
+          <mxGeometry height="110" width="140" x="755" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="retry" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#14532D;spacing=8;" value="&lt;b&gt;OCR 재시도&lt;/b&gt;&lt;br&gt;김서울/박인천: 최대 2회&lt;br&gt;서수원: 최대 3회" vertex="1">
+          <mxGeometry height="105" width="210" x="720" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="lock" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7F1D1D;spacing=8;" value="&lt;b&gt;침대 결합&lt;/b&gt;&lt;br&gt;magnetic_docking&lt;br&gt;자동 리프트 3.5초 대기" vertex="1">
+          <mxGeometry height="120" width="180" x="980" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="half_rev" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7F1D1D;spacing=8;" value="&lt;b&gt;강제 후진&lt;/b&gt;&lt;br&gt;환자별 접근거리의 1/2&lt;br&gt;→ 병실 밖 복귀 위치 확보" vertex="1">
+          <mxGeometry height="120" width="220" x="960" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="save_staging" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E22CE;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#581C87;spacing=8;" value="&lt;b&gt;Room Return Staging 저장&lt;/b&gt;&lt;br&gt;귀환 시 사용할 Pose + Yaw" vertex="1">
+          <mxGeometry height="95" width="235" x="952.5" y="865" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_nav" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#1E3A8A;spacing=8;" value="&lt;b&gt;Nav2&lt;/b&gt;&lt;br&gt;1층 엘리베이터 이동" vertex="1">
+          <mxGeometry height="95" width="380" x="1325" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="up" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7C2D12;spacing=8;" value="&lt;b&gt;Elevator UP Sequence&lt;/b&gt;&lt;br&gt;1F 문 열림 → 탑승&lt;br&gt;FixedJoint 결합 → 문 닫힘&lt;br&gt;2F 상승 → 2F Map 전환 → 하차" vertex="1">
+          <mxGeometry height="170" width="440" x="1295" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="mri_nav" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#1E3A8A;spacing=8;" value="&lt;b&gt;Nav2&lt;/b&gt;&lt;br&gt;2층 MRI 목표로 이동" vertex="1">
+          <mxGeometry height="95" width="380" x="1325" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="mri_wait1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#78350F;spacing=8;" value="&lt;b&gt;MRI 도착&lt;/b&gt;&lt;br&gt;3초 정지" vertex="1">
+          <mxGeometry height="90" width="240" x="1395" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="mri_rev" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7F1D1D;spacing=8;" value="&lt;b&gt;11m 강제 후진&lt;/b&gt;&lt;br&gt;들어온 방향 그대로&lt;br&gt;검사 대기 위치 이동" vertex="1">
+          <mxGeometry height="115" width="370" x="1330" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="inspect" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#78350F;spacing=8;" value="&lt;b&gt;MRI 검사 완료 대기&lt;/b&gt;&lt;br&gt;K 키 또는 /inspection/complete Service" vertex="1">
+          <mxGeometry height="110" width="420" x="1305" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="inspect_dec" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#C2410C;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#7C2D12;" value="검사 완료&lt;br&gt;신호?" vertex="1">
+          <mxGeometry height="95" width="95" x="1700" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="mri_fwd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7F1D1D;spacing=8;" value="&lt;b&gt;11m 강제 전진&lt;/b&gt;&lt;br&gt;검사 대기 위치 → MRI 재진입" vertex="1">
+          <mxGeometry height="105" width="390" x="1935" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="mri_wait2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#78350F;spacing=8;" value="&lt;b&gt;MRI 재도착&lt;/b&gt;&lt;br&gt;3초 정지&lt;br&gt;환자 침대 복귀 처리" vertex="1">
+          <mxGeometry height="105" width="280" x="1990" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_nav" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#1E3A8A;spacing=8;" value="&lt;b&gt;Nav2&lt;/b&gt;&lt;br&gt;2층 엘리베이터 복귀 좌표 이동" vertex="1">
+          <mxGeometry height="100" width="400" x="1930" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="down" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7C2D12;spacing=8;" value="&lt;b&gt;Elevator DOWN Sequence&lt;/b&gt;&lt;br&gt;Nav2 OFF → 오른쪽 90° 회전&lt;br&gt;2F 문 열림 → 직접 탑승&lt;br&gt;1F 하강 → 1F Map 전환 → 외부 이탈" vertex="1">
+          <mxGeometry height="165" width="460" x="1900" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="room_nav" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#1E3A8A;spacing=8;" value="&lt;b&gt;Nav2 ON&lt;/b&gt;&lt;br&gt;저장해 둔 Room Return Staging으로 이동" vertex="1">
+          <mxGeometry height="105" width="390" x="1935" y="855" as="geometry" />
+        </mxCell>
+        <mxCell id="room_fwd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7F1D1D;spacing=8;" value="&lt;b&gt;강제 전진&lt;/b&gt;&lt;br&gt;접근거리의 1/2&lt;br&gt;→ 침대 원래 결합 위치" vertex="1">
+          <mxGeometry height="110" width="320" x="1970" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="release" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7F1D1D;spacing=8;" value="&lt;b&gt;침대 결합 해제&lt;/b&gt;&lt;br&gt;magnetic_docking release" vertex="1">
+          <mxGeometry height="95" width="270" x="1995" y="1160" as="geometry" />
+        </mxCell>
+        <mxCell id="room_rev2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#7F1D1D;spacing=8;" value="&lt;b&gt;병실 이탈&lt;/b&gt;&lt;br&gt;같은 Yaw 유지&lt;br&gt;접근거리의 1/2 후진" vertex="1">
+          <mxGeometry height="110" width="320" x="1970" y="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="dock_nav" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#1E3A8A;spacing=8;" value="&lt;b&gt;Nav2&lt;/b&gt;&lt;br&gt;AMR 초기 도킹 Pose로 복귀" vertex="1">
+          <mxGeometry height="100" width="320" x="1970" y="1450" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0F766E;strokeColor=#115E59;fontColor=#FFFFFF;fontSize=19;fontStyle=1;strokeWidth=2;" value="MISSION&lt;br&gt;COMPLETE" vertex="1">
+          <mxGeometry height="100" width="100" x="2310" y="1445" as="geometry" />
+        </mxCell>
+        <mxCell id="traffic" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;strokeWidth=1;dashed=1;fontSize=15;fontColor=#334155;spacing=8;" value="&lt;b&gt;Dual AMR 안전 조정&lt;/b&gt;&lt;br&gt;path_conflict_manager&lt;br&gt;corridor_priority_manager&lt;br&gt;&lt;br&gt;Nav2 경로 충돌 → traffic_pause&lt;br&gt;OCR/결합/직선/엘리베이터 → special_motion_pause" vertex="1">
+          <mxGeometry height="230" width="500" x="55" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;strokeWidth=1;dashed=1;fontSize=15;fontColor=#334155;spacing=8;" value="&lt;b&gt;색상&lt;/b&gt;  보라=Mission · 파랑=Nav2 · 초록=OCR · 빨강=강제/결합 · 주황=Elevator · 노랑=MRI" vertex="1">
+          <mxGeometry height="80" width="510" x="60" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="patient" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="patient" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="ready" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="ready" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="ready_dec" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="ready_dec" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="ocr_nav" value="YES">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="305" y="655" />
+              <mxPoint x="650" y="655" />
+              <mxPoint x="650" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="ready_dec" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="ready_fail" value="NO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="ocr_nav" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="ocr" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="ocr_dec" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="825" y="490" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="ocr_dec" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="lock" value="YES">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="ocr_dec" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="retry" value="NO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="retry" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="ocr" value="재시도">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="750" />
+              <mxPoint x="650" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="lock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="half_rev" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="half_rev" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="save_staging" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="save_staging" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="e1_nav" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1070.07" y="1020.07" />
+              <mxPoint x="1250.07" y="1020.07" />
+              <mxPoint x="1250.07" y="230.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="e1_nav" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="up" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="up" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="mri_nav" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="mri_nav" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="mri_wait1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="mri_wait1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="mri_rev" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="mri_rev" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="inspect" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="inspect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="inspect_dec" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="inspect_dec" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="inspect" value="NO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1747.53" y="1055" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="inspect_dec" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="mri_fwd" value="YES">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1747.53" y="232.53" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="mri_fwd" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="mri_wait2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="mri_wait2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="e2_nav" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="e2_nav" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="down" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="down" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="room_nav" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="room_nav" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="room_fwd" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" source="room_fwd" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="release" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e29" edge="1" parent="1" source="release" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="room_rev2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" source="room_rev2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="dock_nav" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e31" edge="1" parent="1" source="dock_nav" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;fontSize=18;" target="end" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" edge="1" parent="1" source="traffic" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endFill=0;strokeWidth=2;strokeColor=#64748B;dashed=1;fontSize=15;fontColor=#475569;" target="ocr_nav" value="경로 충돌 감시">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560.07" y="760.07" />
+              <mxPoint x="560.07" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d2" edge="1" parent="1" source="traffic" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endFill=0;strokeWidth=2;strokeColor=#64748B;dashed=1;fontSize=15;fontColor=#475569;" target="ocr" value="특수동작 우선순위">
+          <mxGeometry relative="1" x="0.703" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <Array as="points">
+              <mxPoint x="750.07" y="700.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d3" edge="1" parent="1" source="traffic" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endFill=0;strokeWidth=2;strokeColor=#64748B;dashed=1;fontSize=15;fontColor=#475569;" target="up" value="엘리베이터 특수동작">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590.07" y="805" />
+              <mxPoint x="590.07" y="1270.07" />
+              <mxPoint x="1210.07" y="1270.07" />
+              <mxPoint x="1210.07" y="410.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d4" edge="1" parent="1" source="traffic" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endFill=0;strokeWidth=2;strokeColor=#64748B;dashed=1;fontSize=15;fontColor=#475569;" target="room_fwd" value="복귀 특수동작">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590.07" y="805" />
+              <mxPoint x="590.07" y="1350.07" />
+              <mxPoint x="1850.07" y="1350.07" />
+              <mxPoint x="1850.07" y="1065" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="footer" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=17;fontColor=#4B5563;" value="※ 실제 patient_transport_manager.py의 최종 run() 순서를 기준으로 구성. 환자별 OCR Pose/접근거리는 프로필에 따라 다르며, 복귀 시 접근거리의 1/2을 사용." vertex="1">
+          <mxGeometry height="45" width="1580" x="450" y="1650" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

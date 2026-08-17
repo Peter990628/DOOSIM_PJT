@@ -1,0 +1,280 @@
+============================================================
+[NAV2] Pose Lock + Corridor/Door Center Navigation
+[NAV2] ROS_DOMAIN_ID=117
+[ORDER] 1) Isaac PLAY  2) 자동 초기 Pose 잠금 확인  3) 2D Goal Pose
+[POSE V2.12] AMR1 실제 Isaac /amr1/world_pose를 6회 안정 확인 후 그대로 자동 잠금
+============================================================
+[INFO] [launch]: All log files can be found below /home/peter-msi/.ros/log/2026-08-11-18-29-15-452547-peter-msi-338560
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [338583]
+[INFO] [map_server-2]: process started with pid [338585]
+[INFO] [lifecycle_manager-3]: process started with pid [338587]
+[INFO] [pose_lock_localizer-4]: process started with pid [338589]
+[INFO] [world_pose_initializer-5]: process started with pid [338591]
+[INFO] [controller_server-6]: process started with pid [338593]
+[INFO] [smoother_server-7]: process started with pid [338595]
+[INFO] [planner_server-8]: process started with pid [338597]
+[INFO] [behavior_server-9]: process started with pid [338599]
+[INFO] [bt_navigator-10]: process started with pid [338601]
+[INFO] [waypoint_follower-11]: process started with pid [338603]
+[INFO] [velocity_smoother-12]: process started with pid [338605]
+[INFO] [lifecycle_manager-13]: process started with pid [338607]
+[INFO] [centerline_navigator-14]: process started with pid [338609]
+[INFO] [rviz2-15]: process started with pid [338611]
+[robot_state_publisher-1] [INFO] [1786440555.636617052] [amr1_robot_state_publisher]: got segment base_link
+[robot_state_publisher-1] [INFO] [1786440555.636743560] [amr1_robot_state_publisher]: got segment base_scan
+[lifecycle_manager-13] [INFO] [1786440555.641644101] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-13] [INFO] [1786440555.644852665] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[velocity_smoother-12] [INFO] [1786440555.646339415] [velocity_smoother]: 
+[velocity_smoother-12] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-12] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1786440555.646915300] [controller_server]: 
+[controller_server-6] 	controller_server lifecycle node launched. 
+[controller_server-6] 	Waiting on external lifecycle transitions to activate
+[controller_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-7] [INFO] [1786440555.647139172] [smoother_server]: 
+[smoother_server-7] 	smoother_server lifecycle node launched. 
+[smoother_server-7] 	Waiting on external lifecycle transitions to activate
+[smoother_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-3] [INFO] [1786440555.647501454] [lifecycle_manager_map]: Creating
+[planner_server-8] [INFO] [1786440555.648062561] [planner_server]: 
+[planner_server-8] 	planner_server lifecycle node launched. 
+[planner_server-8] 	Waiting on external lifecycle transitions to activate
+[planner_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-10] [INFO] [1786440555.648751178] [bt_navigator]: 
+[bt_navigator-10] 	bt_navigator lifecycle node launched. 
+[bt_navigator-10] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-10] [INFO] [1786440555.648879159] [bt_navigator]: Creating
+[waypoint_follower-11] [INFO] [1786440555.649761541] [waypoint_follower]: 
+[waypoint_follower-11] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-11] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-3] [INFO] [1786440555.650016521] [lifecycle_manager_map]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[behavior_server-9] [INFO] [1786440555.651620423] [behavior_server]: 
+[behavior_server-9] 	behavior_server lifecycle node launched. 
+[behavior_server-9] 	Waiting on external lifecycle transitions to activate
+[behavior_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-11] [INFO] [1786440555.651656230] [waypoint_follower]: Creating
+[planner_server-8] [INFO] [1786440555.654902284] [planner_server]: Creating
+[smoother_server-7] [INFO] [1786440555.654910790] [smoother_server]: Creating smoother server
+[controller_server-6] [INFO] [1786440555.657521508] [controller_server]: Creating controller server
+[lifecycle_manager-13] [INFO] [1786440555.659755546] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-13] [INFO] [1786440555.659790031] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[lifecycle_manager-3] [INFO] [1786440555.662761428] [lifecycle_manager_map]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-3] [INFO] [1786440555.662838213] [lifecycle_manager_map]: [34m[1mConfiguring map_server[0m[0m
+[map_server-2] [INFO] [1786440555.665318334] [map_server]: 
+[map_server-2] 	map_server lifecycle node launched. 
+[map_server-2] 	Waiting on external lifecycle transitions to activate
+[map_server-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-2] [INFO] [1786440555.665479778] [map_server]: Creating
+[planner_server-8] [INFO] [1786440555.669428597] [global_costmap.global_costmap]: 
+[planner_server-8] 	global_costmap lifecycle node launched. 
+[planner_server-8] 	Waiting on external lifecycle transitions to activate
+[planner_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-8] [INFO] [1786440555.670737482] [global_costmap.global_costmap]: Creating Costmap
+[controller_server-6] [INFO] [1786440555.674833127] [local_costmap.local_costmap]: 
+[controller_server-6] 	local_costmap lifecycle node launched. 
+[controller_server-6] 	Waiting on external lifecycle transitions to activate
+[controller_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1786440555.675260261] [local_costmap.local_costmap]: Creating Costmap
+[controller_server-6] [INFO] [1786440555.677567307] [controller_server]: Configuring controller interface
+[controller_server-6] [INFO] [1786440555.677710497] [controller_server]: getting goal checker plugins..
+[controller_server-6] [INFO] [1786440555.677812559] [controller_server]: Controller frequency set to 15.0000Hz
+[controller_server-6] [INFO] [1786440555.677834019] [local_costmap.local_costmap]: Configuring
+[controller_server-6] [INFO] [1786440555.687905660] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-6] [INFO] [1786440555.693675839] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-6] [INFO] [1786440555.706200782] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-6] [INFO] [1786440555.706223945] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-6] [INFO] [1786440555.708765743] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-6] [ERROR] [1786440555.717782898] [local_costmap.local_costmap]: The configured inflation radius (0.300) is smaller than the computed inscribed radius (0.370) of your footprint, it is highly recommended to set inflation radius to be at least as big as the inscribed radius to avoid collisions
+[controller_server-6] [INFO] [1786440555.725474306] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-6] [INFO] [1786440555.726443602] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-6] [INFO] [1786440555.727234932] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-6] [INFO] [1786440555.731542586] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[controller_server-6] [INFO] [1786440555.733971100] [controller_server]: Setting transform_tolerance to 0.400000
+[controller_server-6] [INFO] [1786440555.752212380] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[controller_server-6] [INFO] [1786440555.753163051] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1786440555.753370522] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[controller_server-6] [INFO] [1786440555.754857232] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1786440555.755483071] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[controller_server-6] [INFO] [1786440555.755951924] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1786440555.756102839] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[controller_server-6] [INFO] [1786440555.756630623] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1786440555.756786146] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[controller_server-6] [INFO] [1786440555.757264517] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1786440555.757847385] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[controller_server-6] [INFO] [1786440555.758312551] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1786440555.758491498] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[controller_server-6] [INFO] [1786440555.758884228] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1786440555.758899747] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-13] [INFO] [1786440555.767748024] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-7] [INFO] [1786440555.767969200] [smoother_server]: Configuring smoother server
+[smoother_server-7] [INFO] [1786440555.781715864] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-7] [INFO] [1786440555.782625898] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-13] [INFO] [1786440555.794242680] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-8] [INFO] [1786440555.794502339] [planner_server]: Configuring
+[planner_server-8] [INFO] [1786440555.794553946] [global_costmap.global_costmap]: Configuring
+[planner_server-8] [INFO] [1786440555.808953680] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-8] [INFO] [1786440555.814502982] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-8] [INFO] [1786440555.816313994] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-8] [INFO] [1786440555.816356103] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-8] [INFO] [1786440555.818234571] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-8] [INFO] [1786440555.824782295] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-8] [INFO] [1786440555.824805318] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-8] [INFO] [1786440555.826359536] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-8] [INFO] [1786440555.832921055] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[planner_server-8] [INFO] [1786440555.832943067] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-8] [INFO] [1786440555.833430535] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-13] [INFO] [1786440555.839408626] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-9] [INFO] [1786440555.839638458] [behavior_server]: Configuring
+[behavior_server-9] [INFO] [1786440555.846130156] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-9] [INFO] [1786440555.846648603] [behavior_server]: Configuring spin
+[behavior_server-9] [INFO] [1786440555.851136927] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-9] [INFO] [1786440555.851832628] [behavior_server]: Configuring backup
+[behavior_server-9] [INFO] [1786440555.858144457] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-9] [INFO] [1786440555.858882287] [behavior_server]: Configuring drive_on_heading
+[behavior_server-9] [INFO] [1786440555.866624570] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-9] [INFO] [1786440555.867287248] [behavior_server]: Configuring wait
+[lifecycle_manager-13] [INFO] [1786440555.871963256] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-10] [INFO] [1786440555.872206815] [bt_navigator]: Configuring
+[map_server-2] [INFO] [1786440555.933167763] [map_server]: Configuring
+[map_server-2] [INFO] [1786440555.933899411] [map_io]: Loading yaml file: /home/peter-msi/hospital/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_17_13_TRANSPORT_X3_ALL/ros2_ws/install/hospital_nav2/share/hospital_nav2/maps/hospital_map.yaml
+[map_server-2] [INFO] [1786440555.934212040] [map_io]: resolution: 0.05
+[map_server-2] [INFO] [1786440555.934225245] [map_io]: origin[0]: -49.625
+[map_server-2] [INFO] [1786440555.934231055] [map_io]: origin[1]: -4.775
+[map_server-2] [INFO] [1786440555.934236025] [map_io]: origin[2]: 0
+[map_server-2] [INFO] [1786440555.934241515] [map_io]: free_thresh: 0.196
+[map_server-2] [INFO] [1786440555.934246695] [map_io]: occupied_thresh: 0.65
+[map_server-2] [INFO] [1786440555.934252486] [map_io]: mode: trinary
+[map_server-2] [INFO] [1786440555.934257956] [map_io]: negate: 0
+[map_server-2] [INFO] [1786440555.934491686] [map_io]: Loading image_file: /home/peter-msi/hospital/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_17_13_TRANSPORT_X3_ALL/ros2_ws/install/hospital_nav2/share/hospital_nav2/maps/hospital_map.png
+[world_pose_initializer-5] [INFO] [1786440555.948972803] [world_pose_initializer]: AMR1 actual Isaac world pose -> automatic initial pose; wait stable 6 samples
+[lifecycle_manager-13] [INFO] [1786440555.954471120] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-11] [INFO] [1786440555.954782386] [waypoint_follower]: Configuring
+[waypoint_follower-11] [INFO] [1786440555.968121542] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[waypoint_follower-11] [INFO] [1786440555.968426547] [waypoint_follower]: Waypoint pause duration is set to zero, disabling task executor plugin.
+[lifecycle_manager-13] [INFO] [1786440555.968813145] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-12] [INFO] [1786440555.969165519] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-13] [INFO] [1786440555.972831805] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-6] [INFO] [1786440555.972982348] [controller_server]: Activating
+[controller_server-6] [INFO] [1786440555.973017855] [local_costmap.local_costmap]: Activating
+[controller_server-6] [INFO] [1786440555.973029297] [local_costmap.local_costmap]: Checking transform
+[controller_server-6] [INFO] [1786440555.973130467] [local_costmap.local_costmap]: start
+[pose_lock_localizer-4] [INFO] [1786440556.001176966] [pose_lock_localizer]: 첫 2D Pose Estimate 1회만 사용합니다. AMCL/ParticleCloud는 실행하지 않습니다.
+[map_server-2] [INFO] [1786440556.059944151] [map_io]: Read map /home/peter-msi/hospital/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_17_13_TRANSPORT_X3_ALL/ros2_ws/install/hospital_nav2/share/hospital_nav2/maps/hospital_map.png: 1528 X 841 map @ 0.05 m/cell
+[lifecycle_manager-3] [INFO] [1786440556.067323671] [lifecycle_manager_map]: [34m[1mActivating map_server[0m[0m
+[map_server-2] [INFO] [1786440556.067556790] [map_server]: Activating
+[map_server-2] [INFO] [1786440556.069335391] [map_server]: Creating bond (map_server) to lifecycle manager.
+[lifecycle_manager-3] [INFO] [1786440556.071131314] [lifecycle_manager_map]: [34m[1mManaged nodes are active[0m[0m
+[planner_server-8] [INFO] [1786440556.082186788] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 1528 X 841 at 0.050000 m/pix
+[centerline_navigator-14] [INFO] [1786440556.107323776] [centerline_navigator]: 중앙 경로 노드 준비: AMR footprint radius=0.52m, 회전 progress 제약=OFF, FollowPath 자동 재시도=2회, 1F segment 근접 성공=0.30m, 2F 엘리베이터 전용 근접 성공=0.35m
+[controller_server-6] [INFO] [1786440556.124077754] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[centerline_navigator-14] [INFO] [1786440556.214052212] [centerline_navigator]: 지도 준비: 1528x841, 중앙 경로 격자=764x420, 해상도=0.10m, floor=1F responsive
+[rviz2-15] [INFO] [1786440556.216044504] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-15] [INFO] [1786440556.216281681] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[lifecycle_manager-13] [INFO] [1786440556.228483504] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-13] [INFO] [1786440556.228533829] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-7] [INFO] [1786440556.228796264] [smoother_server]: Activating
+[smoother_server-7] [INFO] [1786440556.228834265] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[rviz2-15] [INFO] [1786440556.247009330] [rviz2]: Stereo is NOT SUPPORTED
+[lifecycle_manager-13] [INFO] [1786440556.334312516] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-13] [INFO] [1786440556.334355096] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-8] [INFO] [1786440556.334604786] [planner_server]: Activating
+[planner_server-8] [INFO] [1786440556.334648469] [global_costmap.global_costmap]: Activating
+[planner_server-8] [INFO] [1786440556.334662064] [global_costmap.global_costmap]: Checking transform
+[planner_server-8] [INFO] [1786440556.334755660] [global_costmap.global_costmap]: start
+[world_pose_initializer-5] [INFO] [1786440556.410091134] [world_pose_initializer]: AMR1 stable world pose confirmed: x=-45.0467, y=31.8560, yaw=-89.8deg -> pose lock
+[pose_lock_localizer-4] [INFO] [1786440556.411070027] [pose_lock_localizer]: 초기 위치를 받았습니다. odom TF와 결합해 위치를 잠급니다.
+[rviz2-15] [INFO] [1786440556.435539919] [rviz2]: Trying to create a map of size 1528 x 841 using 1 swatches
+[pose_lock_localizer-4] [INFO] [1786440556.444816192] [pose_lock_localizer]: 초기 위치 잠금 완료: map->odom x=-45.047, y=31.856, yaw=-89.8deg
+[world_pose_initializer-5] [INFO] [1786440556.444864363] [world_pose_initializer]: AMR1 actual-world initial pose locked
+[rviz2-15] [ERROR] [1786440556.454569594] [rviz2]: Vertex Program:rviz/glsl120/indexed_8bit_image.vert Fragment Program:rviz/glsl120/indexed_8bit_image.frag GLSL link result : 
+[rviz2-15] active samplers with a different type refer to the same texture image unit
+[rviz2-15] [INFO] [1786440556.484520219] [rviz2]: Trying to create a map of size 120 x 120 using 1 swatches
+[rviz2-15] [INFO] [1786440556.870021796] [rviz2]: Trying to create a map of size 1528 x 841 using 1 swatches
+[planner_server-8] [INFO] [1786440556.888457271] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[planner_server-8] [INFO] [1786440556.889393946] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1786440556.992481152] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-13] [INFO] [1786440556.992513984] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-9] [INFO] [1786440556.992732806] [behavior_server]: Activating
+[behavior_server-9] [INFO] [1786440556.992760258] [behavior_server]: Activating spin
+[behavior_server-9] [INFO] [1786440556.992769034] [behavior_server]: Activating backup
+[behavior_server-9] [INFO] [1786440556.992775727] [behavior_server]: Activating drive_on_heading
+[behavior_server-9] [INFO] [1786440556.992781047] [behavior_server]: Activating wait
+[behavior_server-9] [INFO] [1786440556.992789794] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1786440557.096361131] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-13] [INFO] [1786440557.096408911] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-10] [INFO] [1786440557.096656387] [bt_navigator]: Activating
+[bt_navigator-10] [INFO] [1786440557.138272095] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1786440557.241325717] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-13] [INFO] [1786440557.241360302] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-11] [INFO] [1786440557.241595726] [waypoint_follower]: Activating
+[waypoint_follower-11] [INFO] [1786440557.241632685] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1786440557.345301677] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-13] [INFO] [1786440557.345346431] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-12] [INFO] [1786440557.345572897] [velocity_smoother]: Activating
+[velocity_smoother-12] [INFO] [1786440557.345621920] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1786440557.449038015] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-13] [INFO] [1786440557.449068863] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-13] [INFO] [1786440557.449076988] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[centerline_navigator-14] [INFO] [1786440575.840129737] [centerline_navigator]: 강제 중앙 경로 생성: 요청=(-24.73,11.48) 보정=(-24.78,11.48), 직선구간=5, 벽 여유=0.52m
+[centerline_navigator-14] [INFO] [1786440575.841018250] [centerline_navigator]: 회전 시작(segment): 목표 yaw=-1.5755rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440575.949461293] [centerline_navigator]: 회전 완료(segment): yaw 오차=-0.51도
+[controller_server-6] [INFO] [1786440576.140289479] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440576.140442918] [centerline_navigator]: 직선 구간 1/5 이동 시작
+[centerline_navigator-14] [WARN] [1786440576.849517487] [centerline_navigator]: 교차 충돌 회피: TRAFFIC PAUSE -> 현재 동작 즉시 정지
+[controller_server-6] [INFO] [1786440576.874004887] [controller_server]: Goal was canceled. Stopping the robot.
+[controller_server-6] [INFO] [1786440576.874049751] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[centerline_navigator-14] [INFO] [1786440582.648805875] [centerline_navigator]: 교차 충돌 회피: TRAFFIC RESUME -> 현재 위치에서 기존 최종 목표 재계산
+[centerline_navigator-14] [INFO] [1786440582.930632428] [centerline_navigator]: 강제 중앙 경로 생성: 요청=(-24.73,11.48) 보정=(-24.78,11.48), 직선구간=5, 벽 여유=0.52m
+[centerline_navigator-14] [INFO] [1786440582.931609639] [centerline_navigator]: 회전 시작(segment): 목표 yaw=-1.5767rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440583.004866506] [centerline_navigator]: 회전 완료(segment): yaw 오차=-0.58도
+[controller_server-6] [INFO] [1786440583.212244095] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440583.212435155] [centerline_navigator]: 직선 구간 1/5 이동 시작
+[centerline_navigator-14] [WARN] [1786440587.350130277] [centerline_navigator]: 교차 충돌 회피: TRAFFIC PAUSE -> 현재 동작 즉시 정지
+[controller_server-6] [INFO] [1786440587.412480009] [controller_server]: Goal was canceled. Stopping the robot.
+[controller_server-6] [INFO] [1786440587.412532989] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[centerline_navigator-14] [INFO] [1786440595.549080967] [centerline_navigator]: 교차 충돌 회피: TRAFFIC RESUME -> 현재 위치에서 기존 최종 목표 재계산
+[centerline_navigator-14] [WARN] [1786440595.551344760] [centerline_navigator]: 교차 충돌 회피: TRAFFIC PAUSE -> 현재 동작 즉시 정지
+[centerline_navigator-14] [INFO] [1786440633.548833699] [centerline_navigator]: 교차 충돌 회피: TRAFFIC RESUME -> 현재 위치에서 기존 최종 목표 재계산
+[centerline_navigator-14] [INFO] [1786440633.820961788] [centerline_navigator]: 강제 중앙 경로 생성: 요청=(-24.73,11.48) 보정=(-24.78,11.48), 직선구간=5, 벽 여유=0.52m
+[centerline_navigator-14] [INFO] [1786440633.822066457] [centerline_navigator]: 회전 시작(segment): 목표 yaw=-1.5874rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440633.901030302] [centerline_navigator]: 회전 완료(segment): yaw 오차=-1.16도
+[controller_server-6] [INFO] [1786440634.104845830] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440634.105066435] [centerline_navigator]: 직선 구간 1/5 이동 시작
+[controller_server-6] [INFO] [1786440640.576324583] [controller_server]: Reached the goal!
+[centerline_navigator-14] [INFO] [1786440640.577217714] [centerline_navigator]: 코너 도착: 짧게 정지 후 다음 방향으로 바로 회전합니다.
+[centerline_navigator-14] [INFO] [1786440641.202021185] [centerline_navigator]: 회전 시작(segment): 목표 yaw=0.0000rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440647.534038424] [centerline_navigator]: 회전 완료(segment): yaw 오차=1.76도
+[controller_server-6] [INFO] [1786440647.710658825] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440647.710897334] [centerline_navigator]: 직선 구간 2/5 이동 시작
+[controller_server-6] [INFO] [1786440657.581825948] [controller_server]: Reached the goal!
+[centerline_navigator-14] [INFO] [1786440657.582752572] [centerline_navigator]: 코너 도착: 짧게 정지 후 다음 방향으로 바로 회전합니다.
+[centerline_navigator-14] [INFO] [1786440658.215048180] [centerline_navigator]: 회전 시작(segment): 목표 yaw=-1.5708rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440661.611811139] [centerline_navigator]: 회전 완료(segment): yaw 오차=-1.62도
+[controller_server-6] [INFO] [1786440661.786653842] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440661.786882893] [centerline_navigator]: 직선 구간 3/5 이동 시작
+[centerline_navigator-14] [WARN] [1786440674.448631605] [centerline_navigator]: 교차 충돌 회피: TRAFFIC PAUSE -> 현재 동작 즉시 정지
+[controller_server-6] [INFO] [1786440674.453617270] [controller_server]: Goal was canceled. Stopping the robot.
+[controller_server-6] [INFO] [1786440674.453652737] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[centerline_navigator-14] [INFO] [1786440683.047683278] [centerline_navigator]: 교차 충돌 회피: TRAFFIC RESUME -> 현재 위치에서 기존 최종 목표 재계산
+[centerline_navigator-14] [INFO] [1786440683.189781850] [centerline_navigator]: 강제 중앙 경로 생성: 요청=(-24.73,11.48) 보정=(-24.78,11.48), 직선구간=3, 벽 여유=0.52m
+[centerline_navigator-14] [INFO] [1786440683.191027354] [centerline_navigator]: 회전 시작(segment): 목표 yaw=-1.5729rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440683.262974425] [centerline_navigator]: 회전 완료(segment): yaw 오차=-1.97도
+[controller_server-6] [INFO] [1786440683.451166422] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440683.451366048] [centerline_navigator]: 직선 구간 1/3 이동 시작
+[controller_server-6] [INFO] [1786440692.923004214] [controller_server]: Reached the goal!
+[centerline_navigator-14] [INFO] [1786440692.924121036] [centerline_navigator]: 코너 도착: 짧게 정지 후 다음 방향으로 바로 회전합니다.
+[centerline_navigator-14] [INFO] [1786440693.554557276] [centerline_navigator]: 회전 시작(segment): 목표 yaw=0.0000rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440700.759096126] [centerline_navigator]: 회전 완료(segment): yaw 오차=1.34도
+[controller_server-6] [INFO] [1786440700.919586064] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440700.919744382] [centerline_navigator]: 직선 구간 2/3 이동 시작
+[controller_server-6] [INFO] [1786440729.992172243] [controller_server]: Reached the goal!
+[centerline_navigator-14] [INFO] [1786440729.994230206] [centerline_navigator]: 코너 도착: 짧게 정지 후 다음 방향으로 바로 회전합니다.
+[centerline_navigator-14] [INFO] [1786440730.607091599] [centerline_navigator]: 회전 시작(segment): 목표 yaw=-1.5708rad, 위치 progress 조건 없이 cmd_vel을 계속 재전송합니다.
+[centerline_navigator-14] [INFO] [1786440738.607331306] [centerline_navigator]: 회전 완료(segment): yaw 오차=-1.75도
+[controller_server-6] [INFO] [1786440738.785946956] [controller_server]: Received a goal, begin computing control effort.
+[centerline_navigator-14] [INFO] [1786440738.786237674] [centerline_navigator]: 직선 구간 3/3 이동 시작
+[INFO] [rviz2-15]: process has finished cleanly [pid 338611]

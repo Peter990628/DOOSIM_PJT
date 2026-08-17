@@ -1,0 +1,6 @@
+V2.12.1 hotfix
+- Fixed RUN_TRAY_2_AUTO_TOTAL_360.sh session lookup.
+- Terminal1 writes output/tray_integrated_v2_12/current_session_id.
+- Terminal2 now checks that exact path first.
+- Terminal2 log directory is also output/tray_integrated_v2_12.
+No navigation/docking behavior was changed by this hotfix.

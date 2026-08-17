@@ -1,0 +1,6 @@
+V2.11 intentional changes from V2.10
+1. cooperative_transport_manager.py: remove world-pose final docking; use stable single ArUco ID then tray-size-derived fixed straight distance (2.05m current geometry).
+2. path_conflict_manager.py: add /amr1|2/tray_docking_active bypass; clear stale PRE_DOCK path and keep peer Nav2 free.
+3. tray_aruco_pair_node.py: scanner wording shows FIXED INSERT.
+4. isaac_config_tray_integrated.json: fixed-distance docking parameters.
+5. V2.10 2.5m/3.2m same-direction convoy is preserved.

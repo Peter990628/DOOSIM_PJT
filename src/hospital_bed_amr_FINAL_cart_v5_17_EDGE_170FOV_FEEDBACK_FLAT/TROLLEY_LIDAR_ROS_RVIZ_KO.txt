@@ -1,0 +1,15 @@
+트롤리 LiDAR ROS/RViz 추가
+
+발행 토픽: /trolley/scan (sensor_msgs/msg/LaserScan)
+LaserScan frame: trolley_lidar
+TF: trolley_base -> trolley_lidar
+기본 발행률: 10 Hz
+
+실행:
+1) ./03_run_isaac.sh
+2) 새 터미널: ./24_check_trolley_lidar_ros.sh
+3) 새 터미널: ./25_open_rviz_trolley_lidar.sh
+4) RViz Fixed Frame = trolley_base
+5) Add -> LaserScan -> Topic = /trolley/scan
+
+Action Graph 없음. Standalone Python이 PhysX LiDAR 데이터를 직접 읽어 ROS2 LaserScan으로 발행함.

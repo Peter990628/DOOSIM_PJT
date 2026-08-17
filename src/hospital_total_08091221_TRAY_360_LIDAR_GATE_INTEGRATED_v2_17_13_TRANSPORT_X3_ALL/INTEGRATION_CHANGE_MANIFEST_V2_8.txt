@@ -1,0 +1,39 @@
+V2.8 CHANGED/ADDED FILES
+
+1. ros2_ws/src/hospital_tray_overlay/hospital_tray_overlay/cooperative_transport_manager.py
+   - AMR1 generic safe-egress added
+   - first PRE_DOCK arrival immediately starts ArUco and docks
+   - peer Nav2 continues during first robot docking
+   - ACTIVE:SEGMENT translation no-progress goal-reissue watchdog
+   - V2.7 traffic/final-rotation safety retained
+
+2. ros2_ws/src/hospital_tray_overlay/hospital_tray_overlay/tray_aruco_pair_node.py
+   - optional OpenCV scanner window
+   - moving scan line / SCANNING / GATE LOCKED overlay
+   - debug image topics retained
+
+3. ros2_ws/src/hospital_tray_overlay/launch/tray_dual_aruco.launch.py
+   - scanner window enabled for AMR1/AMR2
+
+4. tray_overlay/config/isaac_config_tray_integrated.json
+   - safe_egress_amr1
+   - no_progress_watchdog
+   - V2.8 mission states/notes
+
+5. ros2_ws/src/hospital_tray_overlay/setup.py
+   - overlay package 4.2.0
+
+6. RUN_TRAY_1_ISAAC_TOTAL_360.sh
+7. RUN_TRAY_2_AUTO_TOTAL_360.sh
+8. 00_SETUP_TRAY_360_INTEGRATED.sh
+9. FINAL_RUN_COMMANDS_KO.txt
+   - V2.8 paths/output/log labels
+
+10. tray_overlay/check_integration.py
+    - V2.8 static assertions
+
+11. README_V2_8_FIRST_ARRIVAL_ARUCO_AMR1_RECOVERY_KO.md
+12. INTEGRATION_CHANGE_MANIFEST_V2_8.txt
+
+BASELINE IMMUTABILITY RESULT
+- hospital_total_08091221 persistent baseline: 211 files SHA-256 byte-identical PASS

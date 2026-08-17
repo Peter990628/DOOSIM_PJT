@@ -1,0 +1,21 @@
+# V5.16 코너 진입 smoothing + 벽 clearance feedback
+
+- V5.15 기반.
+- 기존 0.20 m path-jump 강제 제한은 다시 넣지 않음.
+- Clearance DP transition에 lateral shift의 2차 변화(shift slope 변화) penalty 추가.
+  - `w_shift_accel = 4.0`
+  - 코너 진입 시 횡이동 shift가 갑자기 변하는 현상 완화.
+- 주행 중 정적 벽 clearance feedback 재계획 추가.
+  - 검사 주기: 0.50 s
+  - 연속 확인: 3회
+  - 반응 시간: 약 1.5 s
+  - 재계획 cooldown: 기존 1.5 s 유지
+  - static wall 기준: `min(dL,dR) < 0.30 m` 또는 `|dL-dR| > 0.35 m`
+  - inflation cost가 아닌 static occupancy map만 사용하여 과거 0.05 m inflation 오판 루프 방지.
+- 기존 기능 유지:
+  - explicit `/spin` pre-align
+  - start_lock 0.15 m
+  - corner centering floor 50%
+  - NEW LiDAR obstacle 3회 연속 replan
+  - tracking error 0.25 m replan
+  - ROS_DOMAIN_ID=120

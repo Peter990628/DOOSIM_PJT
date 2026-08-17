@@ -1,0 +1,6 @@
+V2.10 INTENTIONAL TRAFFIC POLICY CHANGE
+1. hospital_nav2/path_conflict_manager.py modified intentionally.
+2. Same-direction overlapping centerlines now use rolling convoy following.
+3. Follower HOLD <= 2.50m; RESUME >= 3.20m.
+4. Crossing/opposite-direction conflict logic remains unchanged.
+5. V2.9 single-ID ArUco auto-dock and first-arrival docking are preserved.

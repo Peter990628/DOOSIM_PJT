@@ -1,0 +1,988 @@
+{
+  "project": {
+    "name": "Hospital Bed AMR KimSeoul Dual Nav2 + Automatic Elevator + Tray 360 LiDAR Integrated V1",
+    "version": "kimseoul-dual-nav2-elevator-domain115-v1.0-tray360-v1",
+    "stage": "project4/project4_hospital_bed_amr_v1_15_ocr.usd"
+  },
+  "fleet": [
+    {
+      "name": "AMR1",
+      "namespace": "amr1",
+      "root_path": "/World/AMR1",
+      "ocr_key": "O",
+      "target_name": "김서울",
+      "target_birth_date": "2000-11-02",
+      "image_error_to_lateral_sign": -1.0,
+      "image_error_to_yaw_sign": -1.0
+    },
+    {
+      "name": "AMR2",
+      "namespace": "amr2",
+      "root_path": "/World/AMR2",
+      "ocr_key": "P",
+      "target_name": "김서울",
+      "target_birth_date": "2000-11-02",
+      "image_error_to_lateral_sign": -1.0,
+      "image_error_to_yaw_sign": -1.0
+    }
+  ],
+  "patient_candidates": [
+    {
+      "name": "김서울",
+      "birth_date": "2000-11-02"
+    },
+    {
+      "name": "박인천",
+      "birth_date": "1960-07-23"
+    },
+    {
+      "name": "서수원",
+      "birth_date": "1990-02-10"
+    }
+  ],
+  "camera": {
+    "resolution": [
+      640,
+      360
+    ],
+    "frequency_hz": 15,
+    "warmup_frames": 8,
+    "front_prim_suffix": "base_link/front_camera_link/Camera"
+  },
+  "ros2": {
+    "domain_id": 115,
+    "queue_size": 3,
+    "image_topic_suffix": "camera/front/color/image_raw",
+    "request_topic_suffix": "ocr/request",
+    "result_topic_suffix": "ocr/result",
+    "control_topic_suffix": "ocr/control",
+    "status_topic_suffix": "align/status"
+  },
+  "teleop": {
+    "linear_speed_mps": 1.5,
+    "lateral_speed_mps": 1.1,
+    "angular_speed_rad_s": 2.4,
+    "linear_accel_mps2": 2.0,
+    "lateral_accel_mps2": 6.0,
+    "angular_accel_rad_s2": 10.0,
+    "lift_command_speed_mps": 0.012,
+    "wheel_visual_velocity_limit_deg_s": 1800.0
+  },
+  "amr_geometry": {
+    "wheel_radius": 0.075,
+    "wheel_x": 0.3,
+    "wheel_y": 0.2825,
+    "lift_lower_limit_m": 0.0,
+    "lift_upper_limit_m": 0.035
+  },
+  "auto_approach": {
+    "enabled": true,
+    "frames_to_check": 1,
+    "stable_tracking_messages": 2,
+    "tracking_timeout_sec": 6.0,
+    "lateral_kp": 1.6,
+    "max_lateral_speed_mps": 0.2,
+    "forward_distance_m": 3.328,
+    "forward_speed_mps": 0.64,
+    "x_tolerance_px": 12.0,
+    "yaw_align_threshold_px": 1000000.0,
+    "yaw_kp": 0.9,
+    "max_yaw_speed_rad_s": 0.36,
+    "min_yaw_speed_rad_s": 0.1
+  },
+  "nav2": {
+    "enabled": true,
+    "command_timeout_sec": 1.0,
+    "odom_publish_hz": 30.0,
+    "scan_publish_hz": 10.0,
+    "clock_publish_hz": 60.0,
+    "max_linear_speed_mps": 1.8,
+    "max_lateral_speed_mps": 1.1,
+    "max_angular_speed_rad_s": 2.4,
+    "lidar": {
+      "prim_name": "nav_lidar",
+      "translation": [
+        0.0,
+        0.0,
+        0.32
+      ],
+      "min_range_m": 0.15,
+      "max_range_m": 12.0,
+      "horizontal_resolution_deg": 0.5,
+      "vertical_fov_deg": 1.0,
+      "vertical_resolution_deg": 1.0,
+      "rotation_rate_hz": 0.0,
+      "yaw_offset_deg": 0.0,
+      "draw_points": false,
+      "draw_lines": false
+    },
+    "robots": [
+      {
+        "amr_name": "AMR1",
+        "cmd_vel_topic": "/cmd_vel",
+        "odom_topic": "/odom",
+        "scan_topic": "/scan",
+        "clock_topic": "/clock",
+        "odom_frame": "odom",
+        "base_frame": "base_link",
+        "scan_frame": "base_scan",
+        "publish_clock": true,
+        "tf_topic": "/tf",
+        "world_pose_topic": "/amr1/world_pose"
+      },
+      {
+        "amr_name": "AMR2",
+        "cmd_vel_topic": "/amr2/cmd_vel",
+        "odom_topic": "/amr2/odom",
+        "scan_topic": "/amr2/scan",
+        "clock_topic": "/clock",
+        "odom_frame": "amr2/odom",
+        "base_frame": "amr2/base_link",
+        "scan_frame": "amr2/base_scan",
+        "publish_clock": false,
+        "tf_topic": "/amr2/tf",
+        "world_pose_topic": "/amr2/world_pose"
+      }
+    ],
+    "cooperative": {
+      "enabled": true,
+      "cmd_vel_topic": "/coop/cmd_vel",
+      "odom_topic": "/coop/odom",
+      "scan_left_topic": "/coop/scan_left",
+      "scan_right_topic": "/coop/scan_right",
+      "odom_frame": "coop_odom",
+      "base_frame": "cooperative_base_link",
+      "scan_left_frame": "coop_lidar_left",
+      "scan_right_frame": "coop_lidar_right",
+      "tf_topic": "/tf",
+      "command_timeout_sec": 0.5,
+      "odom_publish_hz": 30.0,
+      "scan_publish_hz": 10.0,
+      "max_linear_speed_mps": 0.45,
+      "max_angular_speed_rad_s": 0.35,
+      "self_filter_margin_m": 0.06,
+      "self_filter_max_z_m": 0.5,
+      "note": "One Nav2 virtual base drives two AMRs; two existing PhysX lidars are republished as cooperative observation sources."
+    }
+  },
+  "magnetic_dock": {
+    "enabled": true,
+    "auto_enabled_on_start": true,
+    "capture_distance_m": 1.2,
+    "candidate_bed_paths": [
+      "/World/Bed_KimSeoul",
+      "/World/ParkIncheon",
+      "/World/SeoSuwon",
+      "/World/HospitalBed1",
+      "/World/HospitalBed2",
+      "/World/HospitalBed3",
+      "/World/HospitalBed",
+      "/World/Bed1",
+      "/World/Bed2",
+      "/World/Bed3"
+    ],
+    "candidate_name_keywords": [
+      "bed",
+      "kimseoul",
+      "parkincheon",
+      "seosuwon"
+    ],
+    "break_force_n": 1000000000.0,
+    "break_torque_nm": 1000000000.0,
+    "auto_raise_lift_after_lock": true,
+    "auto_lower_lift_after_release": true,
+    "lift_settle_sec": 3.2,
+    "attached_caster_low_friction": {
+      "enabled": true,
+      "static_friction": 0.02,
+      "dynamic_friction": 0.01,
+      "note": "Only while magnetically attached: lower bed caster/wheel floor friction to suppress stick-slip; restore on release."
+    }
+  },
+  "amr2_clone": {
+    "enabled": true,
+    "source_path": "/World/AMR1",
+    "target_path": "/World/AMR2"
+  },
+  "loaded_drive_profile": {
+    "enabled": true,
+    "wheel_max_force_nm": 60.0,
+    "amr1_wheel_max_force_nm": 60.0
+  },
+  "elevator": {
+    "enabled": true,
+    "trigger_key": "ROS_ONLY",
+    "implementation": "rokey-pre-lift-fixed-joint-plus-physx-kinematic-floor-support-handoff",
+    "operation_mode": "request-response-service-bidirectional",
+    "lift_prim_names": [
+      "Side_Lift_Anim_29",
+      "Side_Lift_Anim_28",
+      "Dummy002"
+    ],
+    "floor_prim_name": "Side_Lift_Anim_29",
+    "lift_distance_m": 11.325,
+    "door_time_s": 2.0,
+    "lift_time_s": 9.0,
+    "floor_proxy_thickness_m": 0.1,
+    "floor_proxy_top_bias_m": -0.001,
+    "floor_proxy_inset_m": 0.03,
+    "capture_margin_m": 0.35,
+    "floor_target_tolerance_m": 0.025,
+    "arrival_floor_sync_timeout_s": 3.0,
+    "arrival_joint_hold_s": 1.5,
+    "post_release_settle_s": 1.2,
+    "boarding_settle_s": 2.0,
+    "entry_distance_m": 7.0,
+    "entry_speed_mps": 0.25,
+    "exit_reverse_distance_m": 5.0,
+    "exit_reverse_speed_mps": 0.25,
+    "rotation_angle_rad": 6.283185307179586,
+    "rotation_speed_rad_s": 0.55,
+    "phase_timeout_s": 90.0,
+    "arrival_command_topic": "/elevator/amr_arrived",
+    "status_topic": "/elevator/status",
+    "map_switch_ack_topic": "/elevator/map_switch_ack",
+    "final_arrival_topic": "/amr1/elevator/arrived",
+    "request_up_service_suffix": "elevator/request_up",
+    "request_down_service_suffix": "elevator/request_down",
+    "return_entry_distance_m": 10.0,
+    "return_entry_speed_mps": 0.25,
+    "return_exit_distance_m": 5.0,
+    "return_exit_speed_mps": 0.25,
+    "mutex_policy": "first-approved-owner-until-complete",
+    "boarding_target_y": 25.91,
+    "return_boarding_target_y": 25.91,
+    "return_exit_target_y": 21.487224578857422
+  },
+  "patient_mri": {
+    "enabled": true,
+    "extension_id": "hospital.patient_transfer",
+    "extension_folder": "patient_mri_transfer/exts",
+    "config": "patient_mri_transfer/config/patient_transfer.json"
+  },
+  "fixed_mri_target": {
+    "enabled": true,
+    "target_prim": "/World/HospitalRuntimeTargets/MRIPatientTarget",
+    "source_table_prim": "/World/HospitalMap/scene/Meshes/Sketchfab_model/Collada_visual_scene_group/TableTop",
+    "world_xyz_m": [
+      7.41316,
+      5.80355,
+      12.2733
+    ],
+    "preserve_source_rotation": false,
+    "fallback_yaw_deg": 0.0,
+    "note": "Measured MRI TableTop translation is preserved, but source rotation is intentionally ignored so every patient MRI turn is a horizontal world-Z yaw and can never pitch into the floor.",
+    "orientation_mode": "world_z_yaw_only"
+  },
+  "follow_camera": {
+    "enabled": true,
+    "body_path": "/World/AMR1/base_link",
+    "rig_path": "/World/AMR1/base_link/FollowCameraRig",
+    "camera_path": "/World/AMR1/base_link/FollowCameraRig/FollowCamera",
+    "position_local_m": [
+      0.0,
+      0.0,
+      6.0
+    ],
+    "target_local_m": [
+      0.0,
+      0.0,
+      0.35
+    ],
+    "focal_length_mm": 24.0,
+    "clipping_range_m": [
+      0.05,
+      10000.0
+    ],
+    "set_active_viewport": true,
+    "up_local": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "view_mode": "amr_local_top_down_follow",
+    "note": "V2.5 camera revert: exact V2.3/original follow-camera behavior restored. Camera is created once under AMR1/base_link at local [0,0,6] and no per-frame camera guard rewrites its transform."
+  },
+  "hospital_staff": {
+    "enabled": true,
+    "root_prim": "/World/HospitalStaff",
+    "anchor_exclude_keywords": [
+      "mri",
+      "patient",
+      "bed",
+      "operating",
+      "dining",
+      "material"
+    ],
+    "first_floor_max_world_z": 6.0,
+    "fallback_anchor_world": [
+      -34.5,
+      12.0,
+      0.0
+    ],
+    "people": [
+      {
+        "role": "Doctor",
+        "source_asset": "staff_assets/source/woman_doctor.glb",
+        "converted_usd": "staff_assets/converted/woman_doctor.usd",
+        "root_prim": "/World/HospitalStaff/Doctor",
+        "uniform_scale": 0.01,
+        "model_yaw_offset_deg": 90.0,
+        "upright_candidate_rotations_xyz_deg": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            90.0,
+            0.0,
+            0.0
+          ],
+          [
+            -90.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            90.0,
+            0.0
+          ],
+          [
+            0.0,
+            -90.0,
+            0.0
+          ]
+        ],
+        "upright_compose_frames": 4,
+        "max_floor_fit_m": 3.0,
+        "target_height_stage_units": 1.72,
+        "min_auto_scale": 1e-05,
+        "max_auto_scale": 10.0,
+        "facing_note": "Rotated 180 degrees from the previous -90 setting so the staff face the intended corridor/elevator direction."
+      },
+      {
+        "role": "Nurse",
+        "source_asset": "staff_assets/source/brenda_nurse.glb",
+        "converted_usd": "staff_assets/converted/brenda_nurse.usd",
+        "root_prim": "/World/HospitalStaff/Nurse",
+        "uniform_scale": 0.01,
+        "model_yaw_offset_deg": 90.0,
+        "upright_candidate_rotations_xyz_deg": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            90.0,
+            0.0,
+            0.0
+          ],
+          [
+            -90.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            90.0,
+            0.0
+          ],
+          [
+            0.0,
+            -90.0,
+            0.0
+          ]
+        ],
+        "upright_compose_frames": 4,
+        "max_floor_fit_m": 3.0,
+        "target_height_stage_units": 1.66,
+        "min_auto_scale": 1e-05,
+        "max_auto_scale": 10.0,
+        "facing_note": "Rotated 180 degrees from the previous -90 setting so the staff face the intended corridor/elevator direction."
+      }
+    ],
+    "placement_mode": "elevator_opposite_station_chair_back",
+    "station_anchor_names": [
+      "office_desk",
+      "tablemid",
+      "desk"
+    ],
+    "station_chair_names": [
+      "chair_01a",
+      "chair"
+    ],
+    "elevator_anchor_names": [
+      "Side_Lift_Anim_29",
+      "Side_Lift_Anim_28",
+      "Dummy002",
+      "elevator",
+      "lift"
+    ],
+    "chair_search_radius_m": 6.0,
+    "behind_chair_offset_m": 0.65,
+    "fallback_lateral_spacing_m": 0.75,
+    "fallback_elevator_world": [
+      -35.3208,
+      12.4256,
+      0.0
+    ],
+    "note": "Human height and station offsets are normalized directly in hospital map stage units; do not convert through metersPerUnit.",
+    "placement_unit_mode": "stage_units"
+  },
+  "amr2_initial_pose": {
+    "x": -47.2788,
+    "y": 26.5713,
+    "yaw": 0.0
+  },
+  "corridor_priority": {
+    "enabled": true,
+    "corridor_1": {
+      "min_x": -38.562,
+      "max_x": -32.0796,
+      "min_y": 10.5645,
+      "max_y": 14.2866
+    },
+    "wait_poses": {
+      "room_side": {
+        "x": -40.0,
+        "y": 8.0,
+        "yaw_deg": 90.0
+      },
+      "elevator_side": {
+        "x": -30.0,
+        "y": 18.0,
+        "yaw_deg": -90.0
+      }
+    },
+    "release_delay_sec": 3.0,
+    "note": "Separate ROS goal reservation manager only; centerline planner/controller parameters are unchanged."
+  },
+  "requested_floor_fix": {
+    "enabled": true,
+    "floor2_path": "/World/HospitalMap/Cube",
+    "remove_collision_path": "/World/GroundPlane/CollisionMesh",
+    "level_tolerance_m": 0.25,
+    "min_floor_span_m": 1.0,
+    "min_floor_area_m2": 4.0,
+    "max_floor_thickness_m": 0.65,
+    "fallback_static_friction": 0.95,
+    "fallback_dynamic_friction": 0.85,
+    "note": "Only requested floor fix: copy 1F floor friction to /World/HospitalMap/Cube and deactivate /World/GroundPlane/CollisionMesh at runtime."
+  },
+  "mri_scene_position": {
+    "enabled": true,
+    "prim_path": "/World/HospitalMap/scene",
+    "x_m": 7.41316,
+    "y_m": 5.80355,
+    "preserve_z_rotation_scale": true
+  },
+  "aruco_markers": {
+    "enabled": true,
+    "dictionary": "DICT_4X4_50",
+    "marker_size_m": 0.14,
+    "card_size_m": 0.16,
+    "gap_from_nameplate_m": 0.025,
+    "normal_offset_m": 0.012,
+    "placement": "SEPARATE PNG cards; front-view left/right fixed; parented under bed root; original OCR nameplate untouched",
+    "id_assignment": "김서울=10/11, 박인천=20/21, 서수원=30/31",
+    "beds": [
+      {
+        "patient": "김서울",
+        "bed_prim": "/World/Bed_KimSeoul",
+        "bed_name_tokens": [
+          "kimseoul",
+          "bed_kimseoul",
+          "hospitalbed_kimseoul"
+        ],
+        "left_id": 10,
+        "right_id": 11,
+        "left_texture": "project4/signs/aruco/aruco_4x4_50_id_10.png",
+        "right_texture": "project4/signs/aruco/aruco_4x4_50_id_11.png"
+      },
+      {
+        "patient": "박인천",
+        "bed_prim": "/World/ParkIncheon",
+        "bed_name_tokens": [
+          "parkincheon",
+          "hospitalbed_parkincheon"
+        ],
+        "left_id": 20,
+        "right_id": 21,
+        "left_texture": "project4/signs/aruco/aruco_4x4_50_id_20.png",
+        "right_texture": "project4/signs/aruco/aruco_4x4_50_id_21.png"
+      },
+      {
+        "patient": "서수원",
+        "bed_prim": "/World/SeoSuwon",
+        "bed_name_tokens": [
+          "seosuwon",
+          "hospitalbed_seosuwon"
+        ],
+        "left_id": 30,
+        "right_id": 31,
+        "left_texture": "project4/signs/aruco/aruco_4x4_50_id_30.png",
+        "right_texture": "project4/signs/aruco/aruco_4x4_50_id_31.png"
+      }
+    ]
+  },
+  "cooperative_warehouse_cart": {
+    "enabled": true,
+    "root_path": "/World/CooperativeWarehouseCart",
+    "design": "hospital_total_08091221 preserved + 360 LiDAR + collision-aware dual Nav2 + exact three-post/five-marker ArUco gate + dual lift/fixed-joint + cooperative tray transport.",
+    "placement": {
+      "mode": "fixed_user_world_pose",
+      "fixed_world_xyz_m": [
+        -22.69,
+        11.03,
+        0.0
+      ],
+      "fixed_yaw_deg": 0.0,
+      "floor_z_m": 0.0,
+      "note": "User-selected scenario start from Isaac screenshot. Root Z is corrected by runtime cart builder so caster contact stays on floor."
+    },
+    "geometry": {
+      "length_m": 2.2,
+      "width_m": 1.74,
+      "deck_thickness_m": 0.075,
+      "minimum_deck_underside_m": 0.46,
+      "lift_contact_gap_m": 0.015,
+      "fallback_lift_top_z_m": 0.174,
+      "caster_radius_m": 0.075,
+      "caster_visual_width_m": 0.045,
+      "caster_corner_inset_m": 0.13,
+      "amr_width_m": 0.74,
+      "dock_x_m": 0.0,
+      "dock_pad_length_m": 0.62,
+      "dock_pad_width_m": 0.4,
+      "dock_pad_thickness_m": 0.018,
+      "underdeck_headroom_above_lift_m": 0.155,
+      "bay_side_wall_thickness_m": 0.05,
+      "bay_center_wall_thickness_m": 0.06,
+      "body_floor_clearance_m": 0.08,
+      "upper_fascia_height_m": 0.07,
+      "sensor_window_bottom_m": 0.22,
+      "sensor_window_top_m": 0.41,
+      "lower_rail_height_m": 0.14,
+      "upper_rail_height_m": 0.045,
+      "corner_post_size_m": 0.05,
+      "sensor_window_note": "Keep lidar plane around z=0.32 m unobstructed; structural rails below 0.22 m and above 0.41 m.",
+      "lift_receiver_contact_overlap_m": 0.0015,
+      "lift_adapter": {
+        "enabled": true,
+        "hanger_x_m": 0.245,
+        "hanger_y_offset_m": 0.155,
+        "hanger_thickness_m": 0.038,
+        "upper_mount_thickness_m": 0.04,
+        "graphite_rgb": [
+          0.14,
+          0.16,
+          0.18
+        ],
+        "accent_rgb": [
+          0.1,
+          0.12,
+          0.14
+        ],
+        "note": "V11.1: UpperAnchorBlockLeft/Right stay fixed above LiDAR open band. PortalDropPostLeft/Right pass through ReceiverCrossHead and continue to the final Lift-UP contact plane, with 2.5 mm visual overlap into the yellow lift. ArUco/Nav2 logic unchanged.",
+        "bed_style_frame_rgb": [
+          0.08,
+          0.28,
+          0.29
+        ],
+        "portal_post_y_offset_m": 0.155,
+        "portal_post_x_size_m": 0.075,
+        "portal_post_y_size_m": 0.034,
+        "portal_top_beam_x_m": 0.13,
+        "portal_top_beam_y_m": 0.46,
+        "portal_top_beam_height_m": 0.055,
+        "receiver_length_m": 0.58,
+        "receiver_width_m": 0.36,
+        "receiver_height_m": 0.028,
+        "guide_lip_height_m": 0.04,
+        "guide_lip_thickness_m": 0.02,
+        "deck_mount_plate_x_m": 0.18,
+        "deck_mount_plate_y_m": 0.1,
+        "deck_mount_plate_height_m": 0.02,
+        "deck_spine_length_m": 0.5,
+        "deck_spine_width_m": 0.055,
+        "deck_spine_height_m": 0.03,
+        "upper_anchor_block_height_m": 0.03,
+        "upper_anchor_above_sensor_clearance_m": 0.01,
+        "portal_post_contact_overlap_m": 0.0025
+      },
+      "lift_receiver_wear_pad_thickness_m": 0.006,
+      "lift_receiver_vertical_trim_m": 0.0,
+      "lift_contact_measurement": "V11.1: receiver still targets Lift-UP contact. Slim portal posts now continue down to contact_z - 2.5mm instead of ending at receiver_top. Upper square anchors remain above sensor_window_top."
+    },
+    "cargo": {
+      "source_glb": "tray_overlay/assets/medi_m.glb",
+      "converted_usd": "tray_overlay/assets/converted/medi_m.usd",
+      "box_size_m": [
+        0.45,
+        0.375,
+        0.22
+      ],
+      "spacing_m": 0.001,
+      "count": 32,
+      "source_mesh_hint": "Shipper/Object_0",
+      "note": "32 laid-flat cartons, 4x4x2. Built invisible, imported rigid-body/collision APIs stripped, then revealed once. 1 mm XY seams and 0.5 mm deck/layer seams avoid z-fighting while reading as tightly stacked.",
+      "deck_gap_m": 0.0005,
+      "vertical_gap_m": 0.0005,
+      "build_hidden_until_ready": true,
+      "visual_only_locked_to_cart": true
+    },
+    "cart_mass_kg": 75.0,
+    "equivalent_cargo_mass_kg": 140.0,
+    "caster_static_friction": 0.035,
+    "caster_dynamic_friction": 0.02,
+    "capture_distance_m": 0.24,
+    "capture_yaw_deg": 8.0,
+    "lift_settle_sec": 1.4,
+    "break_force_n": 1000000000.0,
+    "break_torque_nm": 1000000000.0,
+    "cooperative_linear_speed_mps": 0.42,
+    "cooperative_angular_speed_rad_s": 0.42,
+    "debug_align_longitudinal_offset_m": 0.0,
+    "keys": {
+      "W/S": "pre-coupled cart forward/reverse",
+      "A/D": "pre-coupled synchronized cart-center left/right turn",
+      "SPACE": "emergency stop",
+      "J": "manual fallback release only; V11.3 target-stop scenario intentionally keeps the tray attached at the destination",
+      "G/K": "development fallback only; V11 manager uses ROS ATTACH automatically after both ArUco docks"
+    },
+    "start_coupled": false,
+    "startup_lift_settle_sec": 1.1,
+    "sync_assist_enabled": true,
+    "sensor_clear_design": true,
+    "nav2_max_linear_speed_mps": 0.45,
+    "nav2_max_angular_speed_rad_s": 0.35,
+    "legacy_lift_visual": {
+      "restore_original_yellow": true,
+      "color_rgb": [
+        0.95,
+        0.56,
+        0.08
+      ],
+      "metallic": 0.05,
+      "roughness": 0.55,
+      "note": "Exact lift color from the original hospital_bed_amr v1.14 Lift material. Mechanics/geometry are not replaced."
+    },
+    "version": "hospital_total_08091221_tray360_gate_final_v2_11_fixed_distance",
+    "baseline": "hospital_total_08091221"
+  },
+  "tray_aruco_docking": {
+    "enabled": true,
+    "dictionary": "DICT_4X4_50",
+    "amr1_ids": [
+      40,
+      41
+    ],
+    "amr2_ids": [
+      42,
+      43
+    ],
+    "marker_size_m": 0.12,
+    "rack_front_offset_m": 0.012,
+    "textures": {
+      "40": "tray_overlay/markers/aruco_4x4_50_id_40.png",
+      "41": "tray_overlay/markers/aruco_4x4_50_id_41.png",
+      "42": "tray_overlay/markers/aruco_4x4_50_id_42.png",
+      "43": "tray_overlay/markers/aruco_4x4_50_id_43.png",
+      "44": "tray_overlay/markers/aruco_4x4_50_id_44.png"
+    },
+    "pre_dock_standoff_m": 0.95,
+    "dock_timeout_s": 75.0,
+    "aruco_stale_s": 0.7,
+    "max_forward_speed_mps": 0.12,
+    "min_forward_speed_mps": 0.025,
+    "max_yaw_speed_rad_s": 0.22,
+    "forward_kp": 0.34,
+    "center_px_kp": 0.55,
+    "lateral_error_yaw_kp": 0.7,
+    "yaw_kp": 0.9,
+    "dock_x_tolerance_m": 0.06,
+    "dock_y_tolerance_m": 0.04,
+    "dock_yaw_tolerance_deg": 5.0,
+    "center_tolerance_px": 24.0,
+    "stable_cycles": 6,
+    "cart_command_topic": "/coop/cart/command",
+    "cart_status_topic": "/coop/cart/status",
+    "note": "V2.11: ArUco is an entrance/authentication trigger. After a stable expected ID at PRE_DOCK, drive straight a tray-size-derived fixed distance (currently 2.05m) exactly like the proven bed forward-distance approach, then stop for dual lift+FixedJoint.",
+    "underdeck_clearance_m": 0.012,
+    "layout": "three_post_five_marker_gate",
+    "amr1_outer_ids": [
+      40,
+      41
+    ],
+    "amr2_outer_ids": [
+      42,
+      43
+    ],
+    "center_id": 44,
+    "logical_pairing": {
+      "AMR1": "virtual LEFT OUTER (ID40 upper + ID41 lower fallback/average) + CENTER ID44",
+      "AMR2": "CENTER ID44 + virtual RIGHT OUTER (ID42 upper + ID43 lower fallback/average)"
+    },
+    "carrier_thickness_m": 0.012,
+    "carrier_width_m": 0.055,
+    "carrier_bottom_z_m": 0.115,
+    "carrier_top_z_m": 0.448,
+    "outer_upper_center_z_m": 0.36,
+    "outer_lower_center_z_m": 0.2,
+    "center_marker_center_z_m": 0.28,
+    "marker_vertical_margin_m": 0.008,
+    "backer_thickness_m": 0.006,
+    "backer_border_m": 0.016,
+    "carrier_rgb": [
+      0.72,
+      0.74,
+      0.76
+    ],
+    "approach_face": "local_minus_x",
+    "marker_surface_normal": "local_minus_x",
+    "pre_dock_handoff_distance_m": 0.22,
+    "pre_dock_handoff_yaw_deg": 3.0,
+    "pre_dock_handoff_stable_cycles": 5,
+    "recovery_enabled": true,
+    "recovery_trigger_lateral_m": 0.045,
+    "recovery_retreat_m": 0.22,
+    "recovery_retreat_speed_mps": 0.055,
+    "recovery_max_attempts": 5,
+    "recovery_cooldown_s": 0.65,
+    "recovery_note": "When longitudinal docking is reached but lateral/yaw/pixel error remains, back out ~22 cm and re-approach under ArUco steering. This gives a forward+turn-only AMR room to correct lateral error.",
+    "visual_gate_good_cycles": 3,
+    "visual_gate_center_tolerance_px": 45.0,
+    "visual_gate_lateral_tolerance_m": 0.1,
+    "visual_gate_yaw_tolerance_deg": 9.0,
+    "visual_to_pose_insert_after_front_m": 0.12,
+    "visual_loss_pose_handoff_margin_m": 0.2,
+    "pre_dock_handoff_pair_only": true,
+    "pre_dock_handoff_require_traffic_free": true,
+    "pre_dock_handoff_note": "V2.9: Nav2 SUCCEEDED hands each AMR off independently. Tight physical fallback remains traffic FREE/READY and peer-safe; never override ACTIVE:ROTATING_FINAL during YIELDING.",
+    "single_marker_autodock_enabled": true,
+    "single_marker_good_cycles": 3,
+    "single_marker_accept_center": true,
+    "single_marker_accept_own_outer": true,
+    "single_marker_pose_handoff": true,
+    "single_marker_note": "V2.11: after PRE_DOCK, any stable expected marker (shared center ID44 or own outer ID) starts fixed-distance straight insertion; no second marker and no world-pose insertion controller are required.",
+    "fixed_distance_docking_enabled": true,
+    "fixed_forward_distance_m": 0.0,
+    "fixed_forward_speed_mps": 0.16,
+    "fixed_forward_timeout_s": 32.0,
+    "fixed_forward_settle_s": 0.55,
+    "fixed_forward_distance_formula": "auto when <=0: pre_dock_standoff_m + 0.5*cart_length_m + dock_x_m",
+    "fixed_forward_note": "V2.11 bed-style tray docking: PRE_DOCK -> stable expected ArUco ID -> straight fixed-distance insertion. With current tray length 2.20m and standoff 0.95m, auto distance is 2.05m to dock_x=0. No world-pose steering/recovery is used during insertion."
+  },
+  "cooperative_auto_transport": {
+    "enabled": true,
+    "manager": "hospital_tray_overlay/cooperative_transport_manager",
+    "run_script": "RUN_TRAY_2_AUTO_TOTAL_360.sh",
+    "target_from_cli": false,
+    "amr_home": [
+      {
+        "x": -45.0467,
+        "y": 31.8558,
+        "yaw": -1.566514
+      },
+      {
+        "x": -47.2788,
+        "y": 26.5713,
+        "yaw": 0.0
+      }
+    ],
+    "note": "V2.12 locks each Nav2 map pose from the robot actual Isaac world pose, preventing start-station spin/path rotation caused by stale hard-coded coordinates. AMR1 safe-egress is straight-only.",
+    "end_behavior": "stop_at_target_keep_attached",
+    "return_tray_home": false,
+    "release_at_target": false,
+    "return_amrs_home": false,
+    "states": [
+      "IDLE",
+      "SAFE_EGRESS_AMR1",
+      "SAFE_EGRESS_AMR2",
+      "DISPATCH_AMRS",
+      "PRE_DOCK",
+      "ARUCO_GATE_START",
+      "ARUCO_DOCKING_AMR1_OR_AMR2_FIRST",
+      "BOTH_DOCKED",
+      "LIFT_AND_ATTACH",
+      "COOPERATIVE_READY",
+      "COOPERATIVE_NAV_TO_TARGET",
+      "TRANSPORT_COMPLETE"
+    ],
+    "target_mode": "corridor_1_minus_x_end_cart_clear",
+    "fixed_target": {
+      "x": 7.9,
+      "y": 10.13,
+      "yaw_deg": 0.0,
+      "source": "user screenshot destination (x≈7.9, y≈10.13)",
+      "note": "Mission succeeds at this fixed cooperative cart goal and keeps the tray attached."
+    },
+    "version": "hospital_total_08091221_tray360_gate_v2_12",
+    "dispatch_mode": "ORIGINAL_AMR1_NAV2 + ORIGINAL_AMR2_NAV2 + ORIGINAL_PATH_CONFLICT; no shared-map replacement",
+    "dispatch_note": "The uploaded final baseline AMR1/AMR2 Nav2 launches and final path_conflict_manager are called unchanged. No shared-map replacement; no forked base Nav2Bridge.",
+    "corridor_end_margin_m": 0.25,
+    "start_pose": {
+      "x": -22.69,
+      "y": 11.03,
+      "yaw_deg": 0.0,
+      "source": "user screenshot start"
+    },
+    "collision_avoidance": {
+      "enabled": true,
+      "manager": "hospital_nav2/path_conflict_manager",
+      "overlap_distance_m": 1.2,
+      "hold_trigger_distance_m": 4.0,
+      "release_clearance_m": 1.2,
+      "release_delay_sec": 2.0,
+      "tie_distance_m": 0.35,
+      "head_on_enabled": false,
+      "note": "Uses hospital_total_08091221 final path_conflict_manager unchanged. Both /traffic_pause and /amr2/traffic_pause are already wired to centerline_navigator. 360 LaserScan overlay restores local-costmap obstacle observations."
+    },
+    "safe_egress_amr2": {
+      "enabled": true,
+      "station_x": -47.2788,
+      "station_y": 26.5713,
+      "station_yaw_deg": 0.0,
+      "distance_m": 0.14,
+      "speed_mps": 0.12,
+      "yaw_kp": 1.2,
+      "max_yaw_speed_rad_s": 0.18,
+      "yaw_abort_deg": 15.0,
+      "lateral_abort_m": 0.2,
+      "station_guard_radius_m": 0.85,
+      "progress_tolerance_m": 0.015,
+      "front_lidar_half_angle_deg": 15.0,
+      "front_stop_range_m": 0.55,
+      "scan_stale_s": 1.0,
+      "timeout_s": 8.0,
+      "settle_s": 0.6,
+      "note": "V2.12 AMR2 relative safe-egress retained; Nav2 initial pose is locked from the actual Isaac world pose.",
+      "min_success_progress_m": 0.1,
+      "soft_continue_progress_m": 0.07,
+      "retry_count": 2,
+      "retry_speed_mps": 0.13,
+      "fatal_on_timeout": false,
+      "mode": "relative_from_actual_start_pose"
+    },
+    "baseline": "hospital_total_08091221",
+    "mission_label": "FINAL DEMO V2.12: actual-world pose lock + straight AMR1 release + first-arrival fixed-distance ArUco dock + cooperative transport",
+    "safe_egress_amr1": {
+      "enabled": true,
+      "station_x": -45.0467,
+      "station_y": 31.8558,
+      "station_yaw_deg": -89.754,
+      "distance_m": 0.12,
+      "speed_mps": 0.1,
+      "yaw_kp": 1.2,
+      "max_yaw_speed_rad_s": 0.18,
+      "yaw_abort_deg": 8.0,
+      "lateral_abort_m": 0.2,
+      "front_lidar_half_angle_deg": 15.0,
+      "front_stop_range_m": 0.45,
+      "scan_stale_s": 1.0,
+      "timeout_s": 8.0,
+      "min_success_progress_m": 0.1,
+      "soft_continue_progress_m": 0.07,
+      "retry_count": 2,
+      "retry_speed_mps": 0.1,
+      "fatal_on_timeout": false,
+      "mode": "relative_from_actual_start_pose",
+      "note": "V2.12 AMR1 station release: short straight-only 0.12m escape. No angular command is allowed before Nav2; actual Isaac world pose is the localization reference.",
+      "straight_only": true,
+      "station_guard_radius_m": 0.9
+    },
+    "no_progress_watchdog": {
+      "enabled": true,
+      "timeout_s": 8.0,
+      "min_progress_m": 0.06,
+      "max_replans_per_amr": 3,
+      "replan_cooldown_s": 4.0,
+      "translation_status_prefix": "ACTIVE:SEGMENT_",
+      "note": "V2.9 only: if an AMR is physically stationary during a translation segment while traffic is FREE/READY, republish the same PRE_DOCK goal so CenterlineNavigator cancels/replans. ROTATING/PAUSED/PLANNING are excluded."
+    }
+  },
+  "final_scene_staff": {
+    "enabled": true,
+    "root_prim": "/World/HospitalStaff",
+    "non_physical_visuals": true,
+    "doctor_mri": {
+      "role": "DoctorMRI",
+      "source_asset": "tray_overlay/assets/final_staff/doctor.glb",
+      "converted_usd": "tray_overlay/assets/final_staff_converted/doctor.usd",
+      "root_prim": "/World/HospitalStaff/DoctorMRI",
+      "target_height_stage_units": 1.76,
+      "uniform_scale": 0.01,
+      "model_yaw_offset_deg": 0.0,
+      "mri_table_prim": "/World/HospitalMap/scene/Meshes/Sketchfab_model/Collada_visual_scene_group/TableTop",
+      "side_offset_m": 1.35,
+      "forward_offset_m": 0.15,
+      "note": "V2.12: doctor.glb is a T-pose asset whose arm span is slightly larger than body height. Force +90deg X so local +Y body height becomes world +Z; manual captured root pose overrides automatic placement when available.",
+      "forced_visual_rotation_xyz_deg": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "placement_mode": "fixed_mri_world_yaw_side",
+      "placement_yaw_deg": 0.0,
+      "side_sign": 1.0
+    },
+    "woman_doctor_tray_goal": {
+      "role": "WomanDoctorTrayGoal",
+      "source_asset": "tray_overlay/assets/final_staff/woman_doctor.glb",
+      "converted_usd": "tray_overlay/assets/final_staff_converted/woman_doctor.usd",
+      "root_prim": "/World/HospitalStaff/WomanDoctorTrayGoal",
+      "target_height_stage_units": 1.72,
+      "uniform_scale": 1.0,
+      "model_yaw_offset_deg": 0.0,
+      "lateral_offset_m": 1.95,
+      "forward_offset_m": 0.25,
+      "note": "Placed near the cooperative tray destination but ~1.95 m laterally outside the cart centerline/footprint, facing the arriving cart."
+    },
+    "nurse_desk": {
+      "role": "NurseDesk",
+      "source_asset": "tray_overlay/assets/final_staff/nurse_surgical_rigged.glb",
+      "converted_usd": "tray_overlay/assets/final_staff_converted/nurse_surgical_rigged.usd",
+      "root_prim": "/World/HospitalStaff/NurseDesk",
+      "target_height_stage_units": 1.68,
+      "uniform_scale": 1.0,
+      "model_yaw_offset_deg": 0.0,
+      "chair_side_offset_m": 0.48,
+      "note": "Placed beside the detected reception/table chair, facing the table and kept non-physical."
+    },
+    "upright_candidate_rotations_xyz_deg": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        90,
+        0,
+        0
+      ],
+      [
+        -90,
+        0,
+        0
+      ],
+      [
+        0,
+        90,
+        0
+      ],
+      [
+        0,
+        -90,
+        0
+      ]
+    ],
+    "min_auto_scale": 1e-05,
+    "max_auto_scale": 100.0,
+    "max_floor_fit_m": 3.0,
+    "manual_pose_file": "tray_overlay/config/manual_staff_poses.json",
+    "manual_pose_override_enabled": true
+  }
+}

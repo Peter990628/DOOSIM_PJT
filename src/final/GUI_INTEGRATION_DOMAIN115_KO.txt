@@ -1,0 +1,17 @@
+최종프로젝트4 + DOOSIM GUI 연결 (ROS_DOMAIN_ID=115)
+
+[변경 범위]
+1) 기존 최종프로젝트4의 주행/속도/좌표/충돌회피/안전구역 이동 로직은 변경하지 않음.
+2) DOOSIM(2)의 GUI 연결부만 추가:
+   - GUI 환자 선택/AMR 선택 -> 기존 04_run_ocr_mission_1.sh 또는 04_run_ocr_mission_2.sh 실행
+   - 환자 이름 -> 기존 미션 인자 1/2/3으로 변환
+   - 검사완료 버튼 -> /amr1/inspection/complete 또는 /amr2/inspection/complete Trigger 서비스 호출
+   - 위치 표시 -> /amr1/world_pose, /amr2/world_pose 구독
+3) 최종프로젝트4의 실행 ROS Domain을 115로 통일.
+
+[GUI 실행]
+./run_ros_gui.sh
+브라우저: http://127.0.0.1:5000
+
+[연결 경로]
+브라우저 -> app.py -> ros_bridge.py / mission_runtime.py -> 기존 최종프로젝트4 ROS2 미션

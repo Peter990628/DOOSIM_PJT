@@ -1,0 +1,38 @@
+[V2.10 최초 1회]
+cd ~/hospital_bed_amr_projects/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_9
+chmod +x ./*.sh scripts/*.sh tray_overlay/scripts/*.py
+./00_SETUP_TRAY_360_INTEGRATED.sh
+
+[터미널 1 - Isaac]
+cd ~/hospital_bed_amr_projects/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_9
+export ROS_DOMAIN_ID=117
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+export ROS_LOCALHOST_ONLY=0
+./RUN_TRAY_1_ISAAC_TOTAL_360.sh
+# Isaac 창이 뜨면 PLAY
+
+[터미널 2 - ROS/Nav2/트레이 자동 미션]
+cd ~/hospital_bed_amr_projects/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_9
+export ROS_DOMAIN_ID=117
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+export ROS_LOCALHOST_ONLY=0
+./RUN_TRAY_2_AUTO_TOTAL_360.sh
+
+[V2.10 정상 로그 핵심]
+# 시작 직후 AMR1/AMR2 각각 짧은 safe-egress
+# [SAFE EGRESS PASS] AMR1 ...
+# [SAFE EGRESS PASS] AMR2 ...
+#
+# AMR2가 먼저 PRE_DOCK 도착하면 AMR1을 기다리지 않음
+# [PRE_DOCK ARRIVAL V2.10] AMR2: Nav2 SUCCEEDED...
+# [ARUCO START PASS V2.10] scanner/debug windows ready
+# [TRAY STATE] ARUCO_DOCKING_AMR2 ...
+# DOOSIM AMR1/AMR2 ARUCO SCANNER 창 표시
+# [POSE INSERT DOCKED] AMR2 ...
+#
+# AMR1 ACTIVE:SEGMENT 상태인데 8초간 실제 진행이 없으면
+# [NO-PROGRESS WATCHDOG V2.10] AMR1 ... reissue PRE_DOCK goal ...
+#
+# 두 AMR 모두 도킹 후
+# [PRE_DOCK+ARUCO COMPLETE V2.10]
+# LIFT_AND_ATTACH -> COOPERATIVE_NAV -> TRANSPORT_COMPLETE

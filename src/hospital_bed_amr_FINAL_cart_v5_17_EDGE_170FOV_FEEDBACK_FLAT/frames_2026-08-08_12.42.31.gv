@@ -1,0 +1,10 @@
+digraph G {
+"odom" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 22.176\nBuffer length: 4.058\nMost recent transform: 829.998323\nOldest transform: 825.939916\n"];
+"map" -> "trolley_odom"[label=" Broadcaster: default_authority\nAverage rate: 22.251\nBuffer length: 4.0\nMost recent transform: 829.899836\nOldest transform: 825.90007\n"];
+"trolley_odom" -> "trolley_base"[label=" Broadcaster: default_authority\nAverage rate: 22.251\nBuffer length: 4.0\nMost recent transform: 829.899836\nOldest transform: 825.90007\n"];
+"trolley_base" -> "trolley_lidar"[label=" Broadcaster: default_authority\nAverage rate: 22.251\nBuffer length: 4.0\nMost recent transform: 829.899836\nOldest transform: 825.90007\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1786160551.006655"[ shape=plaintext ] ;
+}->"map";
+}

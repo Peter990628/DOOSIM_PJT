@@ -1,0 +1,52 @@
+트롤리 Virtual Structure + Nav2 1차 통합
+======================================
+
+목표
+- 트롤리를 하나의 가상 이동체로 취급
+- /trolley/scan + /trolley/odom + trolley TF 제공
+- Nav2 /trolley/cmd_vel을 (V,W)로 받아 두 AMR에 차동 분배
+- 초기 검증은 Isaac ground-truth localization 사용
+
+TF
+map -> trolley_odom -> trolley_base -> trolley_lidar
+
+주요 토픽
+/trolley/scan       sensor_msgs/msg/LaserScan
+/trolley/odom       nav_msgs/msg/Odometry
+/trolley/cmd_vel    geometry_msgs/msg/Twist
+
+수정 파일
+- scripts/trolley_lidar_ros_bridge.py
+- scripts/cooperative_warehouse_cart.py
+- scripts/isaac_amr_ros.py
+- config/isaac_config.json
+
+추가 파일
+- ros2_ws/src/hospital_nav2/config/nav2_params_trolley.yaml
+- ros2_ws/src/hospital_nav2/launch/hospital_trolley_navigation.launch.py
+- ros2_ws/src/hospital_nav2/rviz/trolley_navigation.rviz
+- 26_run_nav2_trolley.sh
+- 27_check_trolley_nav2.sh
+- 28_test_trolley_cmd_vel.sh
+
+트롤리 footprint
+- 실제 카트 2.20 x 1.74 m
+- 안전 여유 0.08 m 적용
+- x +/-1.18 m, y +/-0.95 m
+
+권장 시험 순서
+1) ./03_run_isaac.sh
+2) ./27_check_trolley_nav2.sh
+3) ./28_test_trolley_cmd_vel.sh
+4) ./26_run_nav2_trolley.sh
+5) RViz에서 map/scan/local costmap 확인 후 가까운 2D Goal Pose
+
+주의
+- 이번 버전의 map->trolley_odom은 Isaac ground truth 기반 검증용이다.
+- AMCL은 공동구동/Nav2가 안정된 뒤 교체하는 2차 단계다.
+- 기존 AMR1/AMR2 Nav2 설정은 보존했다.
+
+[Clock sync fix V2]
+- disabled-clock Nav2Bridge instances no longer create a fake /clock publisher endpoint.
+- trolley scan/odom/TF timestamps now come directly from subscribed /clock.
+- use ./29_check_trolley_clock_sync.sh to verify publisher count and live delta.

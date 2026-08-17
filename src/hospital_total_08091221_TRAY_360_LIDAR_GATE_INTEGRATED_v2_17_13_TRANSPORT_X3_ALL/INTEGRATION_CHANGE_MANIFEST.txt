@@ -1,0 +1,111 @@
+BASELINE: hospital_total_08091221
+RULE: baseline original files remain byte-identical according to tray_overlay/baseline_hospital_total_08091221_manifest.json.
+
+ADDITIVE / OVERLAY FUNCTIONAL CHANGES V2:
+1. tray_overlay/scripts/nav2_bridge.py
+   - inherited V1 360-degree scan orientation fix; baseline scripts/nav2_bridge.py remains untouched.
+2. tray_overlay/scripts/tray_aruco_markers.py
+   - redesigned from 4-card per-bay rack to exact three-post/five-marker docking gate.
+   - left outer: 40/41, center: 44, right outer: 42/43.
+   - outer post y is forced to +/-2*dock_y so outer+center midpoint equals actual bay center.
+   - carrier posts/backers/cards are visual-only; no physics/collider change.
+3. tray_overlay/markers/aruco_4x4_50_id_44.png
+   - new shared center marker, DICT_4X4_50.
+4. ros2_ws/src/hospital_tray_overlay/hospital_tray_overlay/tray_aruco_pair_node.py
+   - redundant outer marker fusion + shared center marker gate tracking.
+5. ros2_ws/src/hospital_tray_overlay/launch/tray_dual_aruco.launch.py
+   - AMR1 outer 40/41 + center44; AMR2 center44 + outer42/43.
+6. ros2_ws/src/hospital_tray_overlay/hospital_tray_overlay/cooperative_transport_manager.py
+   - final docking logs/expected IDs updated for three-post gate; baseline path conflict/Nav2 untouched.
+7. tray_overlay/config/isaac_config_tray_integrated.json
+   - gate geometry, ID44, marker dimensions, exact logical pairing, version V2.
+8. RUN_TRAY_1_ISAAC_TOTAL_360.sh / RUN_TRAY_2_AUTO_TOTAL_360.sh
+   - V2 status/output messages only; latest hospital_total launch scripts still called unchanged.
+9. CHECK_TRAY_ARUCO_GATE.sh
+   - runtime diagnostic helper.
+10. docs/check scripts updated for V2.
+
+PRESERVED BASELINE FEATURES:
+- ROS_DOMAIN_ID=117
+- AMR2 namespace/map/traffic pause
+- AMR1 traffic pause
+- 2F elevator-only 0.35m near-success
+- stale-goal cleanup
+- AMR2 READY:WAITING_GOAL resume fix
+- corner stop 0.60s, max 0.70rad/s, min 0.12rad/s, KP1.00
+- OCR/MRI/patient/bed/elevator behaviors
+- final hospital_total path_conflict_manager
+
+=== V2.1 MAP LIFECYCLE RECOVERY ===
+Runtime symptom addressed:
+- /amr2/map_server stayed unconfigured [1]
+- /amr2/map missing
+- global costmap remained default ~5x5m
+- Robot is out of bounds / no map received warnings
+
+Additive changes only:
+- hospital_tray_overlay/lifecycle_bootstrap.py: explicit lifecycle configure/activate recovery
+- RUN_TRAY_2_AUTO_TOTAL_360.sh: map_server ACTIVE gate before OccupancyGrid readiness
+- STOP_TRAY_INTEGRATED_ROS.sh: clean stale Nav2/map/lifecycle child processes and ROS CLI daemon
+- setup/package dependency/checker/doc updates
+
+Baseline hospital_total_08091221 source/runtime files remain protected by the original SHA-256 manifest.
+
+=== V2.2 ISAAC STORAGE I/O PREFLIGHT / SAFE RECOVERY ===
+Observed runtime symptom addressed:
+- findmnt reported /mnt/isaac45 as rw, but python.sh read, dd read and touch write all returned Input/output error.
+- metadata-only -x/-f checks could therefore select a dead Isaac installation and create a misleading session.
+
+Additive changes only:
+- scripts/isaac_storage_guard.sh
+  * real python.sh data read, loop-volume write probe, and bundled Isaac Python execution test.
+  * automatically skips an unhealthy candidate and can use another healthy configured Isaac path.
+- RUN_TRAY_1_ISAAC_TOTAL_360.sh
+  * removes stale session before storage preflight.
+  * creates TRAY session only after real I/O + Isaac Python execution pass.
+  * fails fast with recovery commands instead of entering Isaac runtime on an I/O-dead mount.
+  * does NOT auto-fsck.
+- CHECK_ISAAC_STORAGE.sh
+  * one-command non-destructive health check.
+- RECOVER_ISAAC45_STORAGE.sh
+  * --check is non-destructive.
+  * --repair explicitly unmounts/detaches, verifies backing-image reads at several offsets,
+    performs e2fsck only when no sampled I/O error is seen, remounts rw, then re-runs real I/O probes.
+  * interactive REPAIR confirmation unless --yes is supplied.
+- RUN_TRAY_2_AUTO_TOTAL_360.sh
+  * V2.2 session/log path and status label only; V2.1 lifecycle/Nav2 mission logic preserved.
+
+NOT CHANGED:
+- all 231 protected hospital_total_08091221 baseline files
+- latest hospital Nav2 / traffic avoidance / elevator / stale-goal / corner behavior
+- V2.1 explicit map_server lifecycle recovery
+- 360-degree LiDAR bridge fix
+- three-post ArUco gate and cooperative tray mission
+
+=== V2.4 FRONT ARUCO + FOLLOW CAMERA ===
+- tray_overlay/scripts/tray_aruco_markers.py
+  * moved complete marker gate from local +X face to actual PRE_DOCK approach face local -X
+  * marker surface normal remains local -X, directly facing approaching AMR cameras
+  * geometry LEFT40/41 | CENTER44 | RIGHT42/43 unchanged
+  * visual-only, no cart physics changed
+- tray_overlay/config/isaac_config_tray_integrated.json
+  * follow camera changed from 6m top-down to local (-3.2, 0, +2.1)m chase view
+  * target body center (0,0,0.35)m, world/local up +Z
+  * lock_local_pose enabled
+- tray_overlay/scripts/follow_camera_guard.py [NEW]
+  * reasserts follow camera local USD transform every runtime frame
+  * prevents active viewport navigation from leaving the camera visually detached/floating
+- tray_overlay/scripts/isaac_amr_ros_tray_runtime.py
+  * additive camera guard integration only
+- RECOVER_ISAAC45_STORAGE.sh
+  * unmount outer NTFS by device instead of escaped findmnt target path
+- Original hospital_total persistent files remain protected by baseline manifest validation.
+
+
+=== V2.5 CAMERA REVERT ===
+- V2.4 front ArUco gate retained.
+- V2.4 storage device-unmount fix retained.
+- V2.4 rear chase camera REMOVED.
+- V2.4 per-frame follow_camera_guard REMOVED.
+- V2.3/original follow-camera config restored exactly: [0,0,6] -> target [0,0,0.35], up [1,0,0].
+- No camera smoothing/guard added; user requested cause analysis only.

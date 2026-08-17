@@ -1,0 +1,20 @@
+=== V2.16 STATIC VALIDATION ===
+PASS python AST isaac_amr_ros_tray_scan_straight_v216.py
+PASS python AST v216_scan_straight_attach_transport.py
+PASS python AST v216_map_only.launch.py
+PASS bash RUN_V216_1_ISAAC_SCAN_READY_EXTERNAL_SAFE.sh
+PASS bash RUN_V216_2_SCAN_STRAIGHT_ATTACH_TRANSPORT.sh
+start_coupled=False
+marker standoff from tray front=0.75m
+derived AMR local scan-start x=-1.85m
+straight insert distance=1.85m
+insertion commands: linear.y=0.000, angular.z=0.000
+safe route points=430
+safe route min center clearance=1.700m at (-17.632,10.615)
+cart 2.20x1.74 half diagonal=1.402m
+nominal geometric margin=0.298m
+transport pose feedback=/coop/cart/status actual Isaac world x/y/yaw
+blind time-only last-resort not called by V2.16 runner
+ArUco is verification only; no steering from image errors
+existing normal RUN_TRAY_* files remain in package
+NOTE: static validation cannot replace target-PC Isaac/PhysX runtime test.

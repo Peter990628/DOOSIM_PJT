@@ -1,0 +1,375 @@
+pose_lock_localizer:
+  ros__parameters:
+    use_sim_time: true
+    global_frame: map
+    odom_frame: trolley_odom
+    base_frame: trolley_base
+    broadcast_hz: 30.0
+    auto_initial_pose: true
+    initial_x: -45.0467
+    initial_y: 31.8558
+    initial_yaw: -1.566514
+
+centerline_navigator_trolley:
+  ros__parameters:
+    use_sim_time: true
+    global_frame: map
+    base_frame: trolley_base
+    goal_topic: /trolley/center_goal
+    path_topic: /trolley/centerline_path
+    cmd_vel_topic: /trolley/cmd_vel
+    follow_path_action: /follow_path
+    map_topic: /map
+    status_topic: /trolley/center_goal/status
+    require_pose_lock: false
+    downsample_factor: 2
+    robot_safe_radius_m: 0.52
+    goal_snap_radius_m: 2.0
+    center_weight: 0.55
+    turn_penalty: 2.5
+    path_point_spacing_m: 0.10
+    corner_stop_sec: 0.55
+    final_stop_sec: 2.0
+    rotate_before_segment: true
+    rotate_max_speed_rad_s: 0.45
+    rotate_min_speed_rad_s: 0.10
+    rotate_kp: 1.25
+    rotate_tolerance_rad: 0.035
+    rotate_stable_cycles: 5
+    retry_delay_sec: 0.8
+    max_follow_path_retries: 0
+
+bt_navigator:
+  ros__parameters:
+    use_sim_time: true
+    global_frame: map
+    robot_base_frame: trolley_base
+    odom_topic: /trolley/odom
+    bt_loop_duration: 10
+    default_server_timeout: 20
+    wait_for_service_timeout: 1000
+    navigators: [navigate_to_pose, navigate_through_poses]
+    navigate_to_pose:
+      plugin: nav2_bt_navigator/NavigateToPoseNavigator
+    navigate_through_poses:
+      plugin: nav2_bt_navigator/NavigateThroughPosesNavigator
+
+bt_navigator_rclcpp_node:
+  ros__parameters:
+    use_sim_time: true
+
+controller_server:
+  ros__parameters:
+    use_sim_time: true
+    controller_frequency: 20.0
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.001
+    min_theta_velocity_threshold: 0.001
+    failure_tolerance: 0.3
+    progress_checker_plugin: progress_checker
+    goal_checker_plugins: [general_goal_checker]
+    controller_plugins: [FollowPath]
+    progress_checker:
+      plugin: nav2_controller::SimpleProgressChecker
+      required_movement_radius: 0.10
+      movement_time_allowance: 45.0
+    general_goal_checker:
+      stateful: true
+      plugin: nav2_controller::SimpleGoalChecker
+      xy_goal_tolerance: 0.12
+      yaw_goal_tolerance: 0.10
+    FollowPath:
+      # V5.11: explicit pre-alignment is handled by trolley_clearance_navigator via
+      # Nav2 Humble /spin action. Keep controller_server itself as plain MPPI so
+      # FollowPath behavior is deterministic and does not depend on RotationShim syntax.
+      plugin: nav2_mppi_controller::MPPIController
+      time_steps: 48
+      model_dt: 0.05
+      batch_size: 1800
+      vx_std: 0.20
+      vy_std: 0.0
+      wz_std: 0.50
+      vx_max: 0.65
+      vx_min: 0.0
+      vy_max: 0.0
+      wz_max: 1.20
+      ax_max: 1.0
+      ax_min: -1.1
+      ay_max: 0.0
+      ay_min: 0.0
+      az_max: 2.4
+      iteration_count: 1
+      temperature: 0.30
+      gamma: 0.015
+      prune_distance: 1.0
+      transform_tolerance: 0.4
+      motion_model: DiffDrive
+      visualize: false
+      regenerate_noises: true
+      reset_period: 1.0
+      critics: [ConstraintCritic, CostCritic, GoalCritic, GoalAngleCritic, PathAlignCritic, PathFollowCritic, PathAngleCritic, PreferForwardCritic]
+      ConstraintCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 4.0
+      CostCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        critical_cost: 300.0
+        consider_footprint: true
+        collision_cost: 1000000.0
+        near_goal_distance: 0.6
+        trajectory_point_step: 2
+      GoalCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        threshold_to_consider: 1.2
+      GoalAngleCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 4.0
+        threshold_to_consider: 0.6
+      PathAlignCritic:
+        enabled: true
+        use_path_orientations: true
+        cost_power: 1
+        cost_weight: 18.0
+        max_path_occupancy_ratio: 0.10
+        trajectory_point_step: 4
+        threshold_to_consider: 0.5
+        offset_from_furthest: 8
+      PathFollowCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 10.0
+        offset_from_furthest: 5
+        threshold_to_consider: 1.2
+      PathAngleCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        offset_from_furthest: 4
+        threshold_to_consider: 0.8
+        max_angle_to_furthest: 1.0
+      PreferForwardCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 3.0
+        threshold_to_consider: 0.5
+
+controller_server_rclcpp_node:
+  ros__parameters:
+    use_sim_time: true
+
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      update_frequency: 8.0
+      publish_frequency: 4.0
+      global_frame: trolley_odom
+      robot_base_frame: trolley_base
+      use_sim_time: true
+      rolling_window: true
+      width: 8
+      height: 8
+      resolution: 0.05
+      footprint: "[[-1.18, -0.95], [-1.18, 0.95], [1.18, 0.95], [1.18, -0.95]]"
+      footprint_padding: 0.0
+      plugins: [voxel_layer, inflation_layer]
+      voxel_layer:
+        plugin: nav2_costmap_2d::VoxelLayer
+        enabled: true
+        publish_voxel_map: false
+        origin_z: 0.0
+        z_resolution: 0.10
+        z_voxels: 16
+        max_obstacle_height: 1.5
+        mark_threshold: 0
+        observation_sources: scan
+        scan:
+          topic: /trolley/scan
+          max_obstacle_height: 1.5
+          clearing: true
+          marking: true
+          data_type: LaserScan
+          raytrace_max_range: 11.5
+          raytrace_min_range: 0.15
+          obstacle_max_range: 10.0
+          obstacle_min_range: 0.15
+      inflation_layer:
+        plugin: nav2_costmap_2d::InflationLayer
+        cost_scaling_factor: 2.2
+        inflation_radius: 0.45
+      always_send_full_costmap: true
+  local_costmap_client:
+    ros__parameters:
+      use_sim_time: true
+  local_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: true
+
+map_server:
+  ros__parameters:
+    use_sim_time: true
+    yaml_filename: ""
+
+map_saver:
+  ros__parameters:
+    use_sim_time: true
+    save_map_timeout: 5.0
+    free_thresh_default: 0.25
+    occupied_thresh_default: 0.65
+    map_subscribe_transient_local: true
+
+planner_server:
+  ros__parameters:
+    # V5 baseline: State Lattice plans in SE(2): x, y, yaw.
+    # This is intentionally a planner-only comparison. No custom corner gate is used.
+    expected_planner_frequency: 0.5
+    use_sim_time: true
+    planner_plugins: [GridBased]
+    GridBased:
+      # ROS 2 Humble / Iron-and-older pluginlib syntax uses "/".
+      plugin: nav2_smac_planner/SmacPlannerLattice
+      tolerance: 0.25
+      allow_unknown: false
+      max_iterations: 1000000
+      max_on_approach_iterations: 1000
+      max_planning_time: 5.0
+      analytic_expansion_ratio: 3.5
+      analytic_expansion_max_length: 3.0
+      analytic_expansion_max_cost: 200.0
+      analytic_expansion_max_cost_override: false
+
+      # Cost-aware SE(2) search. Higher cost_penalty biases away from
+      # inflated obstacle / wall costs while still allowing a feasible route.
+      cost_penalty: 3.2
+      reverse_penalty: 3.0
+      change_penalty: 0.05
+      non_straight_penalty: 1.10
+      rotation_penalty: 2.0
+      retrospective_penalty: 0.015
+
+      # Replaced at launch time with an installed 5 cm differential-drive
+      # lattice JSON when available. Empty string falls back to Nav2's default.
+      lattice_filepath: "__LATTICE_FILE__"
+      lookup_table_size: 20.0
+      cache_obstacle_heuristic: false
+      allow_reverse_expansion: false
+      debug_visualizations: true
+      smooth_path: true
+      smoother:
+        max_iterations: 1000
+        w_smooth: 0.3
+        w_data: 0.2
+        tolerance: 1.0e-10
+        do_refinement: true
+
+planner_server_rclcpp_node:
+  ros__parameters:
+    use_sim_time: true
+
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      update_frequency: 4.0
+      publish_frequency: 4.0
+      global_frame: map
+      robot_base_frame: trolley_base
+      use_sim_time: true
+      footprint: "[[-1.18, -0.95], [-1.18, 0.95], [1.18, 0.95], [1.18, -0.95]]"
+      footprint_padding: 0.0
+      resolution: 0.05
+      track_unknown_space: true
+      plugins: [static_layer, voxel_layer, inflation_layer]
+      static_layer:
+        plugin: nav2_costmap_2d::StaticLayer
+        map_subscribe_transient_local: true
+      voxel_layer:
+        plugin: nav2_costmap_2d::VoxelLayer
+        enabled: true
+        publish_voxel_map: false
+        origin_z: 0.0
+        z_resolution: 0.10
+        z_voxels: 16
+        max_obstacle_height: 1.5
+        mark_threshold: 0
+        observation_sources: scan
+        scan:
+          topic: /trolley/scan_front
+          max_obstacle_height: 1.5
+          clearing: true
+          marking: true
+          data_type: LaserScan
+          raytrace_max_range: 11.5
+          raytrace_min_range: 0.15
+          obstacle_max_range: 10.0
+          obstacle_min_range: 0.15
+      inflation_layer:
+        plugin: nav2_costmap_2d::InflationLayer
+        cost_scaling_factor: 1.8
+        inflation_radius: 1.15
+      always_send_full_costmap: true
+  global_costmap_client:
+    ros__parameters:
+      use_sim_time: true
+  global_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: true
+
+behavior_server:
+  ros__parameters:
+    local_costmap_topic: local_costmap/costmap_raw
+    local_footprint_topic: local_costmap/published_footprint
+    global_costmap_topic: global_costmap/costmap_raw
+    global_footprint_topic: global_costmap/published_footprint
+    cycle_frequency: 10.0
+    behavior_plugins: [spin, backup, drive_on_heading, wait]
+    spin:
+      plugin: nav2_behaviors/Spin
+    backup:
+      plugin: nav2_behaviors/BackUp
+    drive_on_heading:
+      plugin: nav2_behaviors/DriveOnHeading
+    wait:
+      plugin: nav2_behaviors/Wait
+    global_frame: trolley_odom
+    robot_base_frame: trolley_base
+    transform_tolerance: 0.4
+    use_sim_time: true
+    simulate_ahead_time: 2.0
+    max_rotational_vel: 1.20
+    min_rotational_vel: 0.20
+    rotational_acc_lim: 2.4
+
+robot_state_publisher:
+  ros__parameters:
+    use_sim_time: true
+
+waypoint_follower:
+  ros__parameters:
+    use_sim_time: true
+    loop_rate: 20
+    stop_on_failure: true
+    waypoint_task_executor_plugin: wait_at_waypoint
+    wait_at_waypoint:
+      plugin: nav2_waypoint_follower::WaitAtWaypoint
+      enabled: true
+      waypoint_pause_duration: 0
+
+velocity_smoother:
+  ros__parameters:
+    use_sim_time: true
+    smoothing_frequency: 20.0
+    scale_velocities: false
+    feedback: OPEN_LOOP
+    max_velocity: [0.65, 0.0, 1.20]
+    min_velocity: [-0.25, 0.0, -1.20]
+    max_accel: [1.0, 0.0, 2.4]
+    max_decel: [-1.2, 0.0, -3.0]
+    odom_topic: /trolley/odom
+    odom_duration: 0.1
+    deadband_velocity: [0.01, 0.0, 0.01]
+    velocity_timeout: 0.35

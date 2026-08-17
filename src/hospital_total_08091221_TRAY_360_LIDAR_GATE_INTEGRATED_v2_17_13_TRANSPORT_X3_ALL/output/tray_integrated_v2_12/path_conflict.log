@@ -1,0 +1,32 @@
+============================================================
+[TRAFFIC] AMR1/AMR2 실제 centerline path 충돌 회피
+[DOMAIN] ROS_DOMAIN_ID=117
+[MAP] AMR1=/map AMR2=/amr2/map
+[RULE 1] OCR/결합/해체/강제직선/엘리베이터 특수동작 AMR = 절대 우선
+[RULE 2] 반대방향/교차 path는 기존 우선권 회피 유지
+[CONVOY V2.10] 같은 방향 공통경로는 두 AMR 동시주행; 약 2.5m 이내에서 뒤차만 잠시 정지
+[CONVOY V2.10] 간격이 3.2m 이상 벌어지면 뒤차 즉시 재출발
+[RESUME] 특수동작 종료 또는 충돌구간 해제 시 기존 최종 목표 재계산
+[STATUS] ros2 topic echo /traffic_conflict/status
+============================================================
+[INFO] [1786440567.061766370] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=False
+[INFO] [1786440567.062197252] [path_conflict_manager]: AMR2 TRAFFIC_PAUSE=False
+[INFO] [1786440567.062472320] [path_conflict_manager]: AMR1 SPECIAL_MOTION_PAUSE=False
+[INFO] [1786440567.062709627] [path_conflict_manager]: AMR2 SPECIAL_MOTION_PAUSE=False
+[INFO] [1786440567.062987270] [path_conflict_manager]: 경로 충돌 회피 준비: overlap<=1.00m, hold_trigger=4.0m, release_delay=2.0s, special-priority=ON, head-on-pass=OFF, physical-guard=ON 5.0m->6.0m, maps=/map//amr2/map
+[INFO] [1786440567.067425279] [path_conflict_manager]: AMR2 floor=1f
+[INFO] [1786440567.516823187] [path_conflict_manager]: AMR1 floor=1f
+[WARN] [1786440575.950373831] [path_conflict_manager]: 충돌 경로 감지(1f): winner=AMR2, loser=AMR1, AMR1 entry≈4.15m, AMR2 entry≈1.17m
+[WARN] [1786440576.849016864] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=True
+[INFO] [1786440582.648600057] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=False
+[WARN] [1786440587.349596742] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=True
+[INFO] [1786440595.548949760] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=False
+[WARN] [1786440595.550659860] [path_conflict_manager]: 충돌 경로 감지(1f): winner=AMR2, loser=AMR1, AMR1 entry≈2.98m, AMR2 entry≈0.00m
+[WARN] [1786440595.551007004] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=True
+[INFO] [1786440633.548319560] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=False
+[WARN] [1786440634.949300901] [path_conflict_manager]: 충돌 경로 감지(1f): winner=AMR2, loser=AMR1, AMR1 entry≈19.92m, AMR2 entry≈0.00m
+[WARN] [1786440674.448129910] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=True
+[INFO] [1786440683.012856281] [path_conflict_manager]: AMR2 tray docking bypass ON; old Nav path cleared
+[INFO] [1786440683.013465868] [path_conflict_manager]: AMR2 tray docking bypass ON; old Nav path cleared
+[INFO] [1786440683.047424842] [path_conflict_manager]: AMR1 TRAFFIC_PAUSE=False
+[INFO] [1786440715.277146458] [path_conflict_manager]: AMR2 tray docking bypass OFF

@@ -1,0 +1,50 @@
+V2.15.1 EXTERNAL SSD SAFE BACKUP - 처음부터 실행
+===================================================
+
+원칙
+- Isaac Sim 5.1: 기존 외장 SSD /mnt/isaac45/isaacsim_5.1 그대로 사용
+- 300GiB ext4 이미지: 읽기 전용 유지
+- 프로젝트/ROS/Kit cache: 내장 SSD 사용
+- 외장 Isaac 설치 파일을 복사/이동/수정하지 않음
+
+최초 1회
+--------
+cd ~/hospital_bed_amr_projects/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_15_1_EXTERNAL_SSD_SAFE
+chmod +x ./*.sh scripts/*.sh tray_overlay/scripts/*.py
+./00_SETUP_TRAY_360_INTEGRATED.sh
+
+Terminal 1
+----------
+cd ~/hospital_bed_amr_projects/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_15_1_EXTERNAL_SSD_SAFE
+./RUN_BACKUP_1_ISAAC_EXTERNAL_SAFE.sh
+
+정상 로그:
+[PASS] ISAAC PYTHON READ OK
+[PASS] INSTALL/kit/cache write test succeeded through bind overlay
+[V2.15.1 EXTERNAL SSD SAFE BACKUP - TERMINAL 1]
+[BACKUP STAGE OPEN] ...project4_hospital_bed_amr_v1_15_ocr.usd
+[BACKUP STAGE READY] HospitalMap + AMR1 + AMR2 composed
+
+Isaac 창에 병원 Stage가 보이면 PLAY.
+Terminal 1은 종료하지 않는다.
+
+Terminal 2
+----------
+새 터미널에서:
+cd ~/hospital_bed_amr_projects/hospital_total_08091221_TRAY_360_LIDAR_GATE_INTEGRATED_v2_15_1_EXTERNAL_SSD_SAFE
+./RUN_BACKUP_2_GUARANTEED_V2_15.sh
+
+V2.15 이동 순서:
+1) Nav2 FollowPath
+2) 10초 무진행이면 odometry direct fallback
+3) 그것도 실패하면 time-only /coop/cmd_vel last resort
+
+종료
+----
+./STOP_BACKUP_EXTERNAL_SAFE.sh
+
+주의
+----
+- 기존 RUN_BACKUP_1_ISAAC_PRECOUPLED_RO.sh 사용하지 않음
+- 기존 RUN_BACKUP_2_RVIZ_NAV2_SAFE_GOAL.sh 사용하지 않음
+- 외장 SSD에 fsck/ntfsfix/format 하지 않음

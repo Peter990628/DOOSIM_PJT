@@ -1,0 +1,26 @@
+V5.4 실행 순서
+
+1) 터미널 1
+cd ~/Downloads/hospital_bed_amr_FINAL_cart_v5_4_CLEARANCE_DP_MPPI_FLAT
+./03_run_isaac.sh
+
+2) 터미널 2
+cd ~/Downloads/hospital_bed_amr_FINAL_cart_v5_4_CLEARANCE_DP_MPPI_FLAT
+./42_run_nav2_trolley_clearance_balance.sh
+
+3) 터미널 3 확인
+cd ~/Downloads/hospital_bed_amr_FINAL_cart_v5_4_CLEARANCE_DP_MPPI_FLAT
+./43_check_clearance_balance.sh
+
+RViz:
+- 빨강 Raw State Lattice Plan = /trolley/raw_plan
+- 초록 Clearance Balanced Plan = /trolley/clearance_plan
+- Local Plan은 기본 숨김
+
+Goal 후 기대 로그:
+- DPCLR[...]
+- CLEARANCE RESULT ... DP+swept=OK
+- FollowPath accepted CLEARANCE-DP path.
+
+동적 장애물로 남은 경로가 위험해진 경우:
+- CONDITIONAL REPLAN: ...

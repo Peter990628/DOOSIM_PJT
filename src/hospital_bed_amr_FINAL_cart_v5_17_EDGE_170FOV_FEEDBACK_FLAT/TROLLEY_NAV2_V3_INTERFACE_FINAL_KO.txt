@@ -1,0 +1,73 @@
+TROLLEY NAV2 V3 - INTERFACE FINAL / TEST PENDING
+================================================
+
+목적
+----
+두 AMR이 결합한 트롤리를 하나의 이동체로 보고,
+어떤 입력원(RViz 또는 중앙 관리 Python 노드)이든 동일한 Goal 인터페이스를 통해
+센터라인 경로 생성 -> Nav2 FollowPath -> 협동 제어로 연결한다.
+
+최종 Goal 체인
+--------------
+RViz 또는 중앙 관리 노드
+  -> /trolley/center_goal (PoseStamped)
+  -> centerline_navigator
+  -> /trolley/centerline_path (Path)
+  -> /follow_path (Nav2 Action)
+  -> /trolley/cmd_vel (Twist)
+  -> cooperative controller
+  -> AMR1 + AMR2
+
+이번 버전 반영 사항
+-------------------
+1. RViz SetGoal topic을 /trolley/center_goal로 통일.
+2. RViz Centerline Path 표시 topic을 /trolley/centerline_path로 통일.
+3. trolley Nav2 launch에서 centerline_navigator를 실제 실행.
+4. trolley는 현재 Isaac ground-truth localization을 사용하므로 centerline의 pose-lock 요구를 비활성화.
+   - AMR용 centerline_navigator 기본 동작(require_pose_lock=true)은 그대로 보존.
+5. /trolley/scan publisher QoS를 BEST_EFFORT + VOLATILE + depth 5로 명시.
+6. /trolley/odom publisher QoS를 RELIABLE + VOLATILE + depth 10으로 명시.
+7. /trolley/cmd_vel cooperative subscriber를 RELIABLE + VOLATILE + depth 1로 명시.
+8. center goal QoS: RELIABLE + VOLATILE + depth 1.
+9. centerline path QoS: RELIABLE + TRANSIENT_LOCAL + depth 1.
+10. centerline direct cmd_vel QoS: RELIABLE + VOLATILE + depth 1.
+11. Local Costmap: VoxelLayer + InflationLayer 유지.
+12. Global Costmap: StaticLayer + VoxelLayer + InflationLayer 시험 구성으로 변경.
+13. Local/Global VoxelLayer의 /trolley/scan 관련 파라미터를 동일하게 통일.
+14. z_resolution=0.10, z_voxels=16 유지 (약 1.6 m 범위).
+15. Local/Global inflation_radius=0.30, cost_scaling_factor=2.2로 통일.
+16. 전역 /cmd_vel -> /trolley/cmd_vel remap은 현재 실제 주행 성공 상태 보존을 위해 유지.
+17. NavigateToPose action은 삭제하지 않음. Nav2 자체 진단/비교 테스트용으로 유지.
+18. 30_check_trolley_interface.sh 추가.
+
+의도적으로 아직 확정하지 않은 부분
+-------------------------------
+- Global VoxelLayer는 Isaac 노트북에서 실제 marking/clearing 검증 후 최종 확정.
+- 전역 cmd_vel remap 제거 여부는 실제 publisher 수와 제어 체인을 확인한 뒤 결정.
+- 회전/후진/코너 주행 성능 튜닝은 통신/설계 검증 이후 마지막 단계.
+- Ground-truth localization은 추후 LiDAR localization(예: AMCL 계열)로 교체 예정.
+
+기능 보존 조건
+--------------
+A. RViz Goal 또는 중앙 관리 노드 Goal이 모두 /trolley/center_goal로 들어갈 것.
+B. centerline_navigator가 /trolley/centerline_path를 생성할 것.
+C. FollowPath가 Nav2 controller로 연결될 것.
+D. /trolley/scan이 Local/Global costmap에 반영될 것.
+E. 결합 상태의 실제 이동 명령은 trolley cooperative 경로가 우선할 것.
+F. 기존 cooperative keyboard fallback은 유지할 것.
+G. commands_from_twist(V,W) 기반 AMR1/AMR2 협동 매핑은 수정하지 않을 것.
+
+첫 실행 후 권장 체크
+-------------------
+./30_check_trolley_interface.sh
+
+특히 확인할 것:
+- /clock publisher = 1
+- /trolley/scan QoS 및 subscriber
+- /trolley/center_goal에 centerline_navigator subscriber 존재
+- /trolley/centerline_path publisher 존재
+- /trolley/cmd_vel publisher/subscriber 수
+- Local/Global costmap obstacle marking
+- RViz에서 centerline path 표시
+
+이 버전은 구조/통신 정리 최종안이며, 실제 Isaac Sim 런타임 테스트 전 상태이다.

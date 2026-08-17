@@ -1,0 +1,37 @@
+V2.6 FINAL CHANGE MANIFEST
+
+BASELINE GUARANTEE
+- hospital_total_08091221 persistent 213 files: SHA-256 byte-identical.
+- Domain 117, AMR2 namespace/map/traffic pause, AMR1 traffic pause, stale-goal fix,
+  2F elevator 0.35m near-success, corner low-speed tuning remain unchanged.
+- Original V2.3/V2.5 follow camera retained; no per-frame camera guard.
+
+TRAY FINAL AUTO-DOCK
+- PRE_DOCK proximity handoff: <=0.30m and <=18deg for 5 stable cycles.
+- Direct zero override holds an already handed-off robot while the partner arrives.
+- Front ArUco IDs retained: AMR1 40/41 + center44, AMR2 center44 + 42/43.
+- ArUco is now an entrance gate, not incorrectly required after camera passes marker plane.
+- After marker-plane crossing: world-pose under-cart insertion.
+- Forward+turn-only recovery: ~0.22m retreat/re-approach for residual Y/Yaw error.
+- Final dock tolerance: X 0.060m, Y 0.040m, yaw 5deg, 6 stable cycles.
+- Existing ATTACH -> yellow lifts -> dual FixedJoint remains automatic.
+- Cooperative Nav2 destination remains x=7.90, y=10.13; tray remains attached.
+
+FINAL STAFF ASSETS
+- tray_overlay/assets/final_staff/doctor.glb
+  SHA256 e4547951474e083b563171231f6d84b1a1d39c60583b6546a615946376801417
+  Runtime placement: beside MRI TableTop along its lateral axis, away from AMR longitudinal lane.
+- tray_overlay/assets/final_staff/woman_doctor.glb
+  SHA256 6319aa2b119b640af0e51903dc4d4a7ff1bd7b016bd7d38950eb196b5e897546
+  Runtime placement: ~1.95m lateral to cooperative tray final target.
+- tray_overlay/assets/final_staff/nurse_surgical_rigged.glb
+  SHA256 3190caf084fada9a39d62cec0e99dbc6b1e035c909767441b55a184fca04e5f8
+  Runtime placement: beside detected desk/table chair.
+- All final staff: collision disabled + rigid body disabled, visual-only.
+
+STATIC VALIDATION
+- Integration checker PASS.
+- Additive Python AST PASS.
+- All shell scripts bash -n PASS.
+- JSON parse PASS.
+- Actual Isaac Sim / PhysX / ROS2 / Nav2 driving must be runtime-tested on target PC.
